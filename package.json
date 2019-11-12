@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "node ./server/some.js",
+    "start": "node server.js",
     "startLocal": "ng serve --port 5000",
     "build": "ng build",
     "test": "ng test",
