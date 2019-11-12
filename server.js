@@ -15,7 +15,7 @@ server.get("/home", function(req, res) {
 });
 
 server.get("/users", function(req, res, next) {
-  fs.readFile(path.join(__dirname  + "/server/users.json"), 'utf8', function(err, data) {
+  fs.readFile(path.join(__dirname  + "/server/data/users.json"), 'utf8', function(err, data) {
     res.send(JSON.stringify(JSON.parse(data)));
   });
   //res.send(JSON.stringify({ "users": { "id": "1", "name": "admin", "password": "pass", "access": true } }));
