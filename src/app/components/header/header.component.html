@@ -1,0 +1,64 @@
+<p>header works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a routerLink="/home" class="navbar-brand">MyLoGo</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="status = !status"
+      data-toggle="collapse"
+      data-target="#navbarId_1"
+      aria-controls="navbarId_1"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      id="navbarId_1"
+      class=" navbar-collapse"
+      [ngClass]="status ? 'collapse' : ''"
+    >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link">Home </a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link">ToDo</a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" class="nav-link">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active">Protected</a>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a
+            class="nav-link dropdown-toggle"
+            dropdownToggle
+            role="button"
+            data-toggle="dropdown"
+            id="navbarDropdownId_1"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >About</a
+          >
+          <div
+            class="dropdown-menu"
+            *dropdownMenu
+            aria-labelledby="navbarDropdownId_1"
+          >
+            <a class="dropdown-item">About#1</a>
+            <a class="dropdown-item">About#2</a>
+            <a class="dropdown-item">About#3</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">About#4</a>
+            <a class="dropdown-item">About#6</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item">About#7</a>
+          </div>
+        </li>
+      </ul>
+  
+      <!-- <app-login></app-login> -->
+    </div>
+  </nav>
