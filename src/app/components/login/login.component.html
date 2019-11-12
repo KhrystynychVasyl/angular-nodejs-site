@@ -1,0 +1,33 @@
+<section *ngIf="!logged">
+    <form
+      *ngIf="!errorMessage"
+      class="form-inline my-2 my-lg-0"
+      #loginForm="ngForm"
+      (ngSubmit)="signIn(loginForm.value)"
+    >
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        name="name"
+        ngModel
+        placeholder="Name"
+      />
+      <input
+        class="form-control mr-sm-2"
+        type="password"
+        name="password"
+        placeholder="password"
+        ngModel
+      />
+  
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Sign In
+      </button>
+    </form>
+    <div *ngIf="errorMessage">
+      <p class="my-auto form-control mr-sm-2">{{ errorMessage }}</p>
+    </div>
+  </section>
+  <button *ngIf="logged" class="btn btn-danger" (click)="signOut()">
+    Sign Out
+  </button>
