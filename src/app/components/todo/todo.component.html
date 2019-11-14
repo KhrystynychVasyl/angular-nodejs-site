@@ -1,0 +1,44 @@
+<p>todo works!</p>
+<section>
+  <header>
+    <section>
+      <input type="text" [(ngModel)]="searchText" />
+      <button [disabled]="!searchText" (click)="searchText = ''">Clear</button>
+    </section>
+    <section>
+      <input
+        type="text"
+        [(ngModel)]="newTodo.title"
+        (keyup.enter)="addTodo()"
+      />
+      <button (click)="addTodo()">Add</button>
+    </section>
+  </header>
+  <section *ngIf="todosList.length > 0">
+    <ul>
+      <section *ngFor="let todo of todosList">
+        <li
+          *ngIf="
+            searchText
+              ? todo.title.toLowerCase().includes(searchText.toLowerCase())
+              : true
+          "
+        >
+          <label
+            ><input
+              type="checkbox"
+              [checked]="todo.complete"
+              (click)="toggleComplete(todo)"
+            /><span [innerHTML]="todo.title | highlight: searchText"></span>
+          </label>
+          <button (click)="deleteTodo(todo) " class="btn">Delete</button>
+        </li>
+      </section>
+    </ul>
+  </section>
+  <footer *ngIf="todosList.length > 0">
+    <strong
+      >Total: {{ todosList.length }}, complete: {{ countCompleteTodo }}</strong
+    >
+  </footer>
+</section>

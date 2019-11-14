@@ -1,3 +1,4 @@
+import { TodoComponent } from "./components/todo/todo.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -14,7 +15,9 @@ import { HeaderComponent } from "./components/header/header.component";
 import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { LoginService } from "./services/login.service";
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from "./material/material.module";
+import { TodosListService } from "./services/todos-list.service";
+import { HighlightPipe } from "./services/pipes/highlight.pipe";
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { MaterialModule } from './material/material.module';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    TodoComponent,
+    HighlightPipe
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,7 @@ import { MaterialModule } from './material/material.module';
     FlexLayoutModule,
     MaterialModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, TodosListService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

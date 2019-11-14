@@ -12,6 +12,8 @@ function postAddId(data) {
   return data.id + 1;
 }
 
+let todos = require("./controlers/todo.controller.js");
+
 router.get("/users", function(req, res, next) {
   fs.readFile(
     path.join(__dirname + "/data/" + "usersList.json"),
@@ -102,77 +104,15 @@ router.delete("/users/:id", jsonParser, function(req, res, next) {
   );
 });
 
-router.get("/todo", function(req, res, next) {
-  fs.readFile(
-    path.join(__dirname + "/data/" + "todosList.json"),
-    "utf8",
-    function(err, data) {
-      if (data) {
-        res.send(JSON.stringify(JSON.parse(data)));
-      } else {
-        fs.writeFile(
-          "./server/data/todosList.json",
-          JSON.stringify([
-            { id: 1, title: "some1", complete: false },
-            { id: 2, title: "some2", complete: false },
-            { id: 3, title: "some3", complete: false }
-          ]),
-          function(err, data) {}
-        );
-        res.send([
-          { id: 1, title: "some1", complete: false },
-          { id: 2, title: "some2", complete: false },
-          { id: 3, title: "some3", complete: false }
-        ]);
-      }
-    }
-  );
-});
+router.get("/todos", todos.findAll);
 
-router.post("/todo", jsonParser, function(req, res, next) {
-  fs.readFile(
-    path.join(__dirname + "/data/" + "todosList.json"),
-    "utf8",
-    function(err, data) {
-      if (data) {
-        data = JSON.parse(data);
-        req.body.id = postAddId(data);
-        data.push(req.body);
-        fs.writeFile(
-          "./server/data/todosList.json",
-          JSON.stringify(data),
-          function(err, data) {}
-        );
-        res.json(req.body);
-      } else {
-        req.body.id = 1;
-        fs.writeFile(
-          "./server/data/todosList.json",
-          JSON.stringify(req.body),
-          function(err, data) {}
-        );
-        res.json(req.body);
-      }
-    }
-  );
-});
+router.get("/todos/:id", todos.findOne);
 
-router.delete("/todo/:id", jsonParser, function(req, res, next) {
-  fs.readFile(
-    path.join(__dirname + "/data/" + "todosList.json"),
-    "utf8",
-    function(err, data) {
-      data = JSON.parse(data);
-      data = data.filter(el => el.id !== parseInt(req.params.id, 10));
-      fs.writeFile(
-        "./server/data/todosList.json",
-        JSON.stringify(data),
-        function(err, data) {}
-      );
-      res.end();
-    }
-  );
-});
+router.post("/todos", todos.create);
+
+router.put("/todos/:id", todos.update);
+
+router.delete("/todos/:id", todos.delete);
 
 router.get("/products", function(req, res, next) {
   fs.readFile(

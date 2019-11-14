@@ -1,12 +1,14 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const bodyParser = require("body-parser");
 
 const server = express();
 
 const PORT = process.env.PORT || 5678;
 
 server.use(require("./server/corsMiddleWare.js"));
+server.use(bodyParser.json())
 
 server.use(express.static(__dirname + "/dist/angular-nodejs-site"));
 

@@ -8,7 +8,7 @@ import { HttpClient } from "@angular/common/http";
 export class LoginService {
   @Output() loggedStatus = new EventEmitter<boolean>();
   readonly API_usersList_URL = "/api/users";
-  private userList: User[];
+  private usersList: User[];
   private logged: boolean = false;
 
   constructor(private http: HttpClient) {}
@@ -16,13 +16,13 @@ export class LoginService {
   getUserList() {
     this.http.get<User[]>(this.API_usersList_URL).subscribe(
       list => {
-        this.userList = list;
+        this.usersList = list;
       },
       error => {
         this.http
           .get<User[]>("http://localhost:5678" + this.API_usersList_URL)
           .subscribe(list => {
-            this.userList = list;
+            this.usersList = list;
           });
       }
     );
@@ -33,7 +33,7 @@ export class LoginService {
   }
 
   singIn(name, pass): boolean {
-    let login = this.userList.find(el => el.name === name);
+    let login = this.usersList.find(el => el.name === name);
     this.logged = login ? login.password === pass : false;
     this.loggedStatus.emit(this.logged);
     return this.logged;
