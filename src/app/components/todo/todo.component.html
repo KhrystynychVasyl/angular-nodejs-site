@@ -2,11 +2,16 @@
 <section>
   <header>
     <section>
-      <input type="text" [(ngModel)]="searchText" />
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search in ToDo"
+      />
       <button [disabled]="!searchText" (click)="searchText = ''">Clear</button>
     </section>
     <section>
       <input
+        placeholder="What you want ToDo?"
         type="text"
         [(ngModel)]="newTodo.title"
         (keyup.enter)="addTodo()"
@@ -15,23 +20,43 @@
     </section>
   </header>
   <section *ngIf="todosList.length > 0">
-    <ul>
+    <ul fxLayout="column" fxLayoutGap="5px">
       <section *ngFor="let todo of todosList">
         <li
+          fxLayout="row"
+          fxLayoutGap="10px"
+          fxLayoutAlign.xs="space-between center"
+          fxLayoutAlign="space-around center"
           *ngIf="
             searchText
               ? todo.title.toLowerCase().includes(searchText.toLowerCase())
               : true
           "
         >
-          <label
-            ><input
-              type="checkbox"
-              [checked]="todo.complete"
-              (click)="toggleComplete(todo)"
-            /><span [innerHTML]="todo.title | highlight: searchText"></span>
-          </label>
-          <button (click)="deleteTodo(todo) " class="btn">Delete</button>
+          <!-- <input
+            type="checkbox"
+            [checked]="todo.complete"
+            (click)="toggleComplete(todo)"
+            id="{{ todo.id }}"
+            fxFlex="20px"
+          /> -->
+
+          <div
+            class="some-1"
+            fxFlex="250px"
+            fxFlex.xs="150px"
+            [ngClass]="todo.complete ? 'completeTodo' : ''"
+            (click)="toggleComplete(todo)"
+            [innerText]="todo.title | highlight: searchText"
+          ></div>
+
+          <button
+            fxFlex="70px"
+            (click)="deleteTodo(todo)"
+            class="btn btn-sm btn-danger"
+          >
+            Delete
+          </button>
         </li>
       </section>
     </ul>
