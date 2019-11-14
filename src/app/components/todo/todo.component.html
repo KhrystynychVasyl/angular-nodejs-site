@@ -24,6 +24,8 @@
       <section *ngFor="let todo of todosList">
         <li
           fxLayout="row"
+          fxFlex.gt-xs="400px"
+          fxFlex.xs="auto"
           fxLayoutGap="10px"
           fxLayoutAlign.xs="space-between center"
           fxLayoutAlign="space-around center"
@@ -43,11 +45,11 @@
 
           <div
             class="some-1"
-            fxFlex="250px"
-            fxFlex.xs="150px"
+            fxFlex="auto"
+            fxFlex.xs="auto"
             [ngClass]="todo.complete ? 'completeTodo' : ''"
             (click)="toggleComplete(todo)"
-            [innerText]="todo.title | highlight: searchText"
+            [innerHTML]="todo.title | highlight: searchText"
           ></div>
 
           <button
