@@ -26,8 +26,10 @@ export class TodoComponent implements OnInit {
   }
 
   addTodo() {
-    this.todosListService.addTodo(this.newTodo);
-    this.newTodo = new Todo();
+    if (this.newTodo.title !== "") {
+      this.todosListService.addTodo(this.newTodo);
+      this.newTodo = new Todo()
+    }
   }
 
   deleteTodo(todo: Todo) {
