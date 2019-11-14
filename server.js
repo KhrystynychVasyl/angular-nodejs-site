@@ -18,7 +18,7 @@ server.get("/", function(req, res) {
   res.sendFile(path.join(__dirname + "index.html"));
 });
 
-server.get("/home", function(req, res) {
+server.get("*", function(req, res) {
   res.sendFile(path.join(__dirname + "/dist/angular-nodejs-site/index.html"));
 });
 
