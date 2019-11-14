@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -13,6 +14,7 @@ import { HeaderComponent } from "./components/header/header.component";
 import { HomeComponent } from "./components/home/home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { LoginService } from "./services/login.service";
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { LoginService } from "./services/login.service";
     BrowserAnimationsModule,
     AppBootstrapModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule,
+    MaterialModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

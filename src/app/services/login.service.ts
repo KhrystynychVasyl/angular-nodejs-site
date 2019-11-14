@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class LoginService {
   @Output() loggedStatus = new EventEmitter<boolean>();
-  readonly API_usersList_URL = "/users";
+  readonly API_usersList_URL = "/api/users";
   private userList: User[];
   private logged: boolean = false;
 
@@ -20,7 +20,7 @@ export class LoginService {
       },
       error => {
         this.http
-          .get<User[]>("http://localhost:5679" + this.API_usersList_URL)
+          .get<User[]>("http://localhost:5678" + this.API_usersList_URL)
           .subscribe(list => {
             this.userList = list;
           });

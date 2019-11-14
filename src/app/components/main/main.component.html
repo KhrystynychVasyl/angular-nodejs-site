@@ -1,9 +1,17 @@
-<div class="mx-auto">
-  
-<app-header></app-header>
-
-<router-outlet></router-outlet>
-
-<app-footer></app-footer>
-
+<div fxflexFill fxLayout="column">
+  <app-header></app-header>
+  <div fxLayout="column">
+    <div class="some" fxLayout="row" fxLayoutGap="5px" fxLayout.xs="column">
+      <div fxFlex="25" class="aside" fxFlexOrder.xs="2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quisquam
+        porro quasi dignissimos soluta. Architecto maxime recusandae itaque
+        doloremque! Non similique, tempore quos odio laborum saepe voluptatem
+        amet at. Neque!
+      </div>
+      <router-outlet fxfill></router-outlet>
+    </div>
+    <div fxLayout="row">
+      <app-footer fxLayoutAlign="center center" fxFlex="auto"></app-footer>
+    </div>
+  </div>
 </div>
