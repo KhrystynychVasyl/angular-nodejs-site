@@ -15,21 +15,33 @@ ul {
   &:first-letter {
     text-transform: uppercase;
   }
+  box-shadow: 3px 3px 5px rgb(109, 96, 96);
 }
-.form-control{
-    border: 1px solid black;
+.form-control {
+  border: 1px solid black;
+  box-shadow: 2px 2px 3px rgb(104, 104, 104);
 }
 
 .btn {
   border-radius: 8px;
   border: 1px solid black;
+  box-shadow: 3px 3px 5px rgb(138, 129, 129);
 }
 
 .completeTodo {
   background: rgb(218, 218, 218);
   text-decoration: line-through;
+  box-shadow: 3px 3px 5px rgb(111, 133, 97);
 }
 
 .input-width {
   max-width: 200x;
+}
+
+.total-info {
+  text-align: center;
+  padding: 3px 15px;
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px rgb(120, 136, 141);
 }

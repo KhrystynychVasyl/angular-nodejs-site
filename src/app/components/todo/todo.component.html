@@ -56,15 +56,18 @@
                 ? todo.title.toLowerCase().includes(searchText.toLowerCase())
                 : true
             "
-          >
+            ><mat-icon *ngIf="!todo.complete">check_box_outline_blank</mat-icon>
+            <mat-icon *ngIf="todo.complete">check_box</mat-icon>
             <div
               class="todo-text"
-              fxFlex="230px"
+              fxFlex="200px"
               fxFlex.gt-xs="500px"
               [ngClass]="todo.complete ? 'completeTodo' : ''"
               (click)="toggleComplete(todo)"
               [innerHTML]="todo.title | highlight: searchText"
-            ></div>
+            >
+              <mat-icon>check_box_outline_blank</mat-icon>
+            </div>
 
             <button
               fxFlex="60px"
@@ -79,8 +82,11 @@
     </span>
   </section>
   <footer *ngIf="todosList.length > 0">
-    <strong
-      >Total: {{ todosList.length }}, complete: {{ countCompleteTodo }}</strong
-    >
+    <div class="total-info">
+      <span>
+        <strong> Total: {{ todosList.length }} </strong><br />
+        <strong>Complete: {{ countCompleteTodo }}</strong>
+      </span>
+    </div>
   </footer>
 </span>
