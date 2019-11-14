@@ -1,7 +1,7 @@
 import { Todo } from "./classes/todo";
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import * as moment from "moment";
 
 @Injectable({
   providedIn: "root"
@@ -10,6 +10,7 @@ export class TodosListService {
   @Output() todosListUpdate = new EventEmitter<boolean>();
   readonly API_todosList_URL = "/api/todos";
   private todosLocalList: Todo[] = [];
+  pageLoaded: moment.Moment;
 
   private urlTemp: string = "";
 
@@ -64,7 +65,13 @@ export class TodosListService {
   }
 
   addTodo(todo: Todo) {
-    todo.id = this.todosLocalList[this.todosLocalList.length - 1].id + 1;
+    if (this.todosLocalList.length > 0) {
+      todo.id = this.todosLocalList[this.todosLocalList.length - 1].id + 1;
+    } else {
+      todo.id = 1;
+    }
+    let time = moment(new Date()).format("HH:mm:ss A");
+    todo.title = todo.title + "\n" + time;
     this.todosLocalList.push(todo);
     this.postHttpTodos(todo);
   }

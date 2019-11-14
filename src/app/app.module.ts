@@ -18,6 +18,7 @@ import { LoginService } from "./services/login.service";
 import { MaterialModule } from "./material/material.module";
 import { TodosListService } from "./services/todos-list.service";
 import { HighlightPipe } from "./services/pipes/highlight.pipe";
+import { ClockComponent } from './components/clock/clock.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HighlightPipe } from "./services/pipes/highlight.pipe";
     HomeComponent,
     LoginComponent,
     TodoComponent,
-    HighlightPipe
+    HighlightPipe,
+    ClockComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
 const path = require("path");
 const fs = require("fs");
 
-function postAddId(data) {
-  data = data[data.length - 1];
-  return data.id + 1;
-}
+// function postAddId(data) {
+//   data = data[data.length - 1];
+//   return data.id + 1;
+// }
 
 exports.create = function(req, res, next) {
   fs.readFile(
@@ -13,7 +13,7 @@ exports.create = function(req, res, next) {
     function(err, data) {
       if (data) {
         data = JSON.parse(data);
-        req.body.id = postAddId(data);
+        //req.body.id = postAddId(data);
         data.push(req.body);
         fs.writeFile(
           "./server/data/todosList.json",
