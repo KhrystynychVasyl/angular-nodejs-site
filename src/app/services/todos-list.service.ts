@@ -21,13 +21,17 @@ export class TodosListService {
 
   getHttpTodosList() {
     let check: boolean;
-    this.http.get<Todo[]>(this.API_todosList_URL).subscribe(
-      list => {
-        check = true;
-      },
-      error => {
-        check = false;
-
+    this.http
+      .get<Todo[]>(this.API_todosList_URL)
+      .subscribe(
+        list => {
+          check = true;
+        },
+        error => {
+          check = false;
+        }
+      )
+      .add(() => {
         this.urlTemp = check
           ? this.API_todosList_URL
           : "http://localhost:5678" + this.API_todosList_URL;
@@ -36,8 +40,7 @@ export class TodosListService {
           this.todosLocalList = list;
           this.todosListUpdate.emit(true);
         }).closed;
-      }
-    ).closed;
+      });
   }
 
   putHttpTodosById(id: number, data) {
