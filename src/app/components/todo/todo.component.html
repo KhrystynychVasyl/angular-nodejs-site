@@ -1,4 +1,4 @@
-<span fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px">
+<span fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px" class="main-class">
   <header fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
     <section
       fxLayout="row"
@@ -45,7 +45,7 @@
   </header>
   <section>
     <span *ngIf="todosList.length > 0">
-      <span fxLayout="column" fxLayoutGap="5px">
+      <span fxLayout="column" fxLayoutGap="8px">
         <ng-container *ngFor="let todo of todosList">
           <span
             fxLayout="row"
@@ -56,26 +56,31 @@
                 ? todo.title.toLowerCase().includes(searchText.toLowerCase())
                 : true
             "
-            ><mat-icon *ngIf="!todo.complete">check_box_outline_blank</mat-icon>
-            <mat-icon *ngIf="todo.complete">check_box</mat-icon>
+          >
             <div
               class="todo-text"
-              fxFlex="200px"
-              fxFlex.gt-xs="500px"
+              fxFlex="320px"
+              fxFlex.gt-xs="580px"
               [ngClass]="todo.complete ? 'completeTodo' : ''"
               (click)="toggleComplete(todo)"
-              [innerHTML]="todo.title | highlight: searchText"
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              fxLayoutGap="5px"
             >
-              <mat-icon>check_box_outline_blank</mat-icon>
+              <mat-icon *ngIf="!todo.complete"
+                >check_box_outline_blank</mat-icon
+              >
+              <mat-icon *ngIf="todo.complete">check_box</mat-icon>
+              <span [innerHTML]="todo.title | highlight: searchText"></span>
+              <button
+                fxFlex="60px"
+                [disabled]="!todo.complete"
+                (click)="deleteTodo(todo)"
+                class="btn btn-sm btn-danger"
+              >
+                Delete
+              </button>
             </div>
-
-            <button
-              fxFlex="60px"
-              (click)="deleteTodo(todo)"
-              class="btn btn-sm btn-danger"
-            >
-              Delete
-            </button>
           </span>
         </ng-container>
       </span>

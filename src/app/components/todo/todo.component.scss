@@ -2,20 +2,29 @@ li {
   list-style-type: none;
 }
 
+.main-class {
+    background-color: rgb(247, 247, 247);
+}
+
 ul {
   padding: 0px;
 }
 
 .todo-text {
   text-indent: 10px;
-  background-color: rgb(211, 245, 255);
+  background-color: #d3ffe4;
   border-radius: 10px;
   border: 1px solid black;
   padding: 3px;
-  &:first-letter {
+  box-shadow: 3px 3px 5px rgb(109, 96, 96);
+
+  & span:first-letter {
     text-transform: uppercase;
   }
-  box-shadow: 3px 3px 5px rgb(109, 96, 96);
+  & span {
+    margin-left: 12px;
+    padding: 2px 5px;
+  }
 }
 .form-control {
   border: 1px solid black;
@@ -29,8 +38,14 @@ ul {
 }
 
 .completeTodo {
-  background: rgb(218, 218, 218);
-  text-decoration: line-through;
+  background: #cad4ce;
+  border: 1px solid red;
+  & span {
+    text-decoration: line-through;
+  }
+  & .btn {
+    background-color: green;
+  }
   box-shadow: 3px 3px 5px rgb(111, 133, 97);
 }
 
