@@ -33,7 +33,7 @@ export class TodoComponent implements OnInit {
   }
 
   deleteTodo(todo: Todo) {
-    this.todosListService.deleteTodoById(todo.id);
+    this.todosListService.deleteTodoById(todo._id);
   }
 
   toggleComplete(todo: Todo) {

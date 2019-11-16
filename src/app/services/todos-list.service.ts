@@ -44,7 +44,7 @@ export class TodosListService {
         }).closed;
       });
   }
-  putHttpTodosById(id: number, data) {
+  putHttpTodosById(id: string, data: Object) {
     this.http.put<Object>(this.urlTemp + "/" + id, data).subscribe().closed;
   }
 
@@ -52,8 +52,8 @@ export class TodosListService {
     this.http.post<Todo>(this.urlTemp, todo).subscribe(inf => inf).closed;
   }
 
-  deleteHttpTodos(id: number) {
-    this.http.delete(this.urlTemp + "/" + id).subscribe().closed;
+  deleteHttpTodos(_id: string) {
+    this.http.delete(this.urlTemp + "/" + _id).subscribe().closed;
   }
 
   getTodosList(): Todo[] {
@@ -77,18 +77,19 @@ export class TodosListService {
     this.postHttpTodos(todo);
   }
 
-  deleteTodoById(id: number) {
-    this.todosLocalList = this.todosLocalList.filter(el => el.id !== id);
-    this.deleteHttpTodos(id);
+  deleteTodoById(_id: string) {
+    this.todosLocalList = this.todosLocalList.filter(el => el._id !== _id);
+    this.deleteHttpTodos(_id);
   }
 
   toggleCompleteTodoById(todo: Todo) {
-    this.updateTodoById(todo.id, { complete: !todo.complete });
+    this.updateTodoById(todo.id, todo);
   }
 
-  updateTodoById(id: number, data: Object) {
-    Object.assign(this.getTodoById(id), data);
-    this.putHttpTodosById(id, data);
+  updateTodoById(id: number, todo: Todo) {
+    let update = { complete: !todo.complete };
+    Object.assign(this.getTodoById(id), update);
+    this.putHttpTodosById(todo._id, update);
   }
 
   getTodoById(id: number) {

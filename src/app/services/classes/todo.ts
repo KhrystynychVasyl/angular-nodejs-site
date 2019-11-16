@@ -5,6 +5,7 @@ export class Todo {
   title: string = "";
   complete: boolean = false;
   time: moment.Moment;
+  _id: string;
   constructor(fields = {}) {
     Object.assign(this, fields);
   }
