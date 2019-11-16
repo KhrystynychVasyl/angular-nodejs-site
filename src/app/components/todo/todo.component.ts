@@ -28,7 +28,7 @@ export class TodoComponent implements OnInit {
   addTodo() {
     if (this.newTodo.title !== "") {
       this.todosListService.addTodo(this.newTodo);
-      this.newTodo = new Todo()
+      this.newTodo = new Todo();
     }
   }
 

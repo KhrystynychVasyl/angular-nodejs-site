@@ -38,18 +38,18 @@ export class TodosListService {
           : "http://localhost:5678" + this.API_todosList_URL;
 
         this.http.get<Todo[]>(this.urlTemp).subscribe(list => {
+          console.log(1);
           this.todosLocalList = list;
           this.todosListUpdate.emit(true);
         }).closed;
       });
   }
-
   putHttpTodosById(id: number, data) {
     this.http.put<Object>(this.urlTemp + "/" + id, data).subscribe().closed;
   }
 
   postHttpTodos(todo: Todo) {
-    this.http.post<Todo>(this.urlTemp, todo).subscribe().closed;
+    this.http.post<Todo>(this.urlTemp, todo).subscribe(inf => inf).closed;
   }
 
   deleteHttpTodos(id: number) {
@@ -71,6 +71,7 @@ export class TodosListService {
       todo.id = 1;
     }
     let time = moment(new Date()).format("HH:mm:ss A");
+    todo.time = moment(new Date());
     todo.title = todo.title + "\n" + time;
     this.todosLocalList.push(todo);
     this.postHttpTodos(todo);
