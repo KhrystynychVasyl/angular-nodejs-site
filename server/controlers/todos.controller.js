@@ -15,8 +15,8 @@ exports.create = function(req, res, next) {
 };
 
 exports.update = function(req, res, next) {
-  body = { put: { updateOld: { id: req.params.id }, updateNew: req.body } };
-  db.update(dbCollectionName, body.put, function(result) {
+  body = { put: { updateNew: req.body } };
+  db.update(dbCollectionName, body.put, req.params.id, function(result) {
     res.end();
   });
 };

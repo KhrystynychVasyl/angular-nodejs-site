@@ -56,20 +56,19 @@ exports.create = function(dbCollectionName, body, callback) {
   }
 };
 
-exports.update = function(dbCollectionName, id, callback) {
+exports.update = function(dbCollectionName, body, id, callback) {
   database
     .collection(dbCollectionName)
-    .updateOne(
-      { _id: new ObjectId(body.updateOld.id) },
-      { $set: body.updateNew },
-      function(err, result) {
-        assert.equal(err, null);
-        assert.equal(1, result.result.n);
-        result.connection ? delete result.connection : "";
-        result.message ? delete result.message : "";
-        callback(result);
-      }
-    );
+    .updateOne({ _id: new ObjectId(id) }, { $set: body.updateNew }, function(
+      err,
+      result
+    ) {
+      assert.equal(err, null);
+      assert.equal(1, result.result.n);
+      result.connection ? delete result.connection : "";
+      result.message ? delete result.message : "";
+      callback(result);
+    });
 };
 
 exports.findOne = function(dbCollectionName, id, callback) {

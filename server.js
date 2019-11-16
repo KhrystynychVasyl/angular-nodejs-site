@@ -7,6 +7,7 @@ const server = express();
 
 const PORT = process.env.PORT || 5678;
 
+
 server.use(require("./server/routers/corsMiddleWare.js"));
 
 server.use(bodyParser.json())

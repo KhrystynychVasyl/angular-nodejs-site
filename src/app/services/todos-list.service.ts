@@ -38,7 +38,6 @@ export class TodosListService {
           : "http://localhost:5678" + this.API_todosList_URL;
 
         this.http.get<Todo[]>(this.urlTemp).subscribe(list => {
-          console.log(1);
           this.todosLocalList = list;
           this.todosListUpdate.emit(true);
         }).closed;
@@ -49,7 +48,9 @@ export class TodosListService {
   }
 
   postHttpTodos(todo: Todo) {
-    this.http.post<Todo>(this.urlTemp, todo).subscribe(inf => inf).closed;
+    this.http.post<Todo>(this.urlTemp, todo).subscribe(todo => {
+      this.todosLocalList.push(todo);
+    }).closed;
   }
 
   deleteHttpTodos(_id: string) {
@@ -73,7 +74,6 @@ export class TodosListService {
     let time = moment(new Date()).format("HH:mm:ss A");
     todo.time = moment(new Date());
     todo.title = todo.title + "\n" + time;
-    this.todosLocalList.push(todo);
     this.postHttpTodos(todo);
   }
 
@@ -83,16 +83,16 @@ export class TodosListService {
   }
 
   toggleCompleteTodoById(todo: Todo) {
-    this.updateTodoById(todo.id, todo);
+    this.updateTodoById(todo._id, todo);
   }
 
-  updateTodoById(id: number, todo: Todo) {
+  updateTodoById(_id: string, todo: Todo) {
     let update = { complete: !todo.complete };
-    Object.assign(this.getTodoById(id), update);
+    Object.assign(this.getTodoById(_id), update);
     this.putHttpTodosById(todo._id, update);
   }
 
-  getTodoById(id: number) {
-    return this.todosLocalList.find(el => el.id === id);
+  getTodoById(_id: string) {
+    return this.todosLocalList.find(el => el._id === _id);
   }
 }
