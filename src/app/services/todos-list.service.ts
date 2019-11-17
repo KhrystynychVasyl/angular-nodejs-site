@@ -1,60 +1,92 @@
-import { Todo } from "./classes/todo";
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as moment from "moment";
+
+import { Todo } from "./classes/todo";
+import { LoginService } from "./login.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class TodosListService {
   @Output() todosListUpdate = new EventEmitter<boolean>();
+
+  private isLogged: boolean = false;
+
   readonly API_todosList_URL = "/api/todos";
+
   private todosLocalList: Todo[] = [];
+
+  private urlTempT: string = "";
+
   pageLoaded: moment.Moment;
 
-  private urlTemp: string = "";
-
-  constructor(private http: HttpClient) {
-    if (this.todosLocalList.length === 0) {
+  constructor(private http: HttpClient, private loginService: LoginService) {
+    this.todosLink;
+    this.isLogged = loginService.isLogged;
+    setTimeout(() => {
+      if (this.todosLocalList.length === 0) {
+        this.getHttpTodosList();
+      }
+    }, 1000);
+    loginService.loggedStatus.subscribe(check => {
+      this.isLogged = check;
       this.getHttpTodosList();
+    });
+  }
+
+  get todosLink() {
+    if (!this.urlTempT) {
+      let check: boolean;
+      this.http
+        .put(this.API_todosList_URL, { test: true })
+        .subscribe(
+          list => {
+            check = true;
+          },
+          error => {
+            check = false;
+          }
+        )
+        .add(() => {
+          this.urlTempT = check
+            ? this.API_todosList_URL
+            : "http://localhost:5678" + this.API_todosList_URL;
+        });
+      return this.urlTempT;
+    } else {
+      return this.urlTempT;
     }
   }
 
   getHttpTodosList() {
-    let check: boolean;
-    this.http
-      .get<Todo[]>(this.API_todosList_URL)
-      .subscribe(
-        list => {
-          check = true;
-        },
-        error => {
-          check = false;
-        }
-      )
-      .add(() => {
-        this.urlTemp = check
-          ? this.API_todosList_URL
-          : "http://localhost:5678" + this.API_todosList_URL;
-
-        this.http.get<Todo[]>(this.urlTemp).subscribe(list => {
-          this.todosLocalList = list;
-          this.todosListUpdate.emit(true);
-        }).closed;
-      });
-  }
-  putHttpTodosById(id: string, data: Object) {
-    this.http.put<Object>(this.urlTemp + "/" + id, data).subscribe().closed;
+    let url;
+    if (this.isLogged) {
+      url =
+        this.todosLink +
+        "/?user=" +
+        encodeURIComponent(this.loginService.currUserData);
+    } else {
+      url = this.todosLink;
+    }
+    this.http.get<Todo[]>(url).subscribe(list => {
+      this.todosLocalList = list;
+      this.todosListUpdate.emit(true);
+    }).closed;
   }
 
-  postHttpTodos(todo: Todo) {
-    this.http.post<Todo>(this.urlTemp, todo).subscribe(todo => {
+  putHttpTodosById(_idTodos: string, data: Object) {
+    this.http.put<Object>(this.urlTempT + "/" + _idTodos, data).subscribe().closed;
+  }
+
+  postHttpTodos(todo: Object) {
+    this.http.post<Todo>(this.urlTempT, todo).subscribe(todo => {
       this.todosLocalList.push(todo);
     }).closed;
   }
 
   deleteHttpTodos(_id: string) {
-    this.http.delete(this.urlTemp + "/" + _id).subscribe().closed;
+    this.http.delete(this.urlTempT + "/" + _id).subscribe().closed;
   }
 
   getTodosList(): Todo[] {
@@ -74,7 +106,8 @@ export class TodosListService {
     let time = moment(new Date()).format("HH:mm:ss A");
     todo.time = moment(new Date());
     todo.title = todo.title + "\n" + time;
-    this.postHttpTodos(todo);
+    let body = { data: todo, _id: this.loginService.currUserData };
+    this.postHttpTodos(body);
   }
 
   deleteTodoById(_id: string) {
@@ -87,9 +120,12 @@ export class TodosListService {
   }
 
   updateTodoById(_id: string, todo: Todo) {
-    let update = { complete: !todo.complete };
-    Object.assign(this.getTodoById(_id), update);
-    this.putHttpTodosById(todo._id, update);
+    let body = {
+      _idUser: this.loginService.currUserData,
+      data: { complete: !todo.complete }
+    };
+    Object.assign(this.getTodoById(_id), body.data);
+    this.putHttpTodosById(todo._id, body);
   }
 
   getTodoById(_id: string) {

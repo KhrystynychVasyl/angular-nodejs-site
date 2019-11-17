@@ -11,7 +11,7 @@ export class LoginService {
   readonly API_usersList_URL = "/api/users";
   readonly API_keysList_URL = "/api/keys";
   private logged: boolean = false;
-  currUser: Object = {};
+  private currUser: string = "";
   private urlTempU: string;
   private urlTempK: string;
 
@@ -78,10 +78,10 @@ export class LoginService {
   logInUser(name, pass, callback) {
     let body = { login: name, password: pass };
     this.http.put(this.usersLink + "/check", body).subscribe(answer => {
-      if (answer) {
+      if (answer["check"]) {
         this.logged = true;
+        this.currUser = answer["_id"];
         this.loggedStatus.emit(this.logged);
-        this.currUser = body;
         callback(true);
       } else {
         callback(false);
@@ -90,19 +90,20 @@ export class LoginService {
   }
 
   logOut(): boolean {
-    this.currUser = {};
+    this.currUser = "";
     this.loggedStatus.emit(false);
     return (this.logged = false);
   }
 
   signIn(name, pass, key, callback) {
     let body = { key: key };
-    this.http.put(this.keysLink + "/1", body).subscribe(answer => {
+    this.http.put(this.keysLink + "/check", body).subscribe(answer => {
       if (answer) {
-        let data = { login: name, password: pass };
+        let data = { login: name, password: pass, access: false };
         this.http.post(this.usersLink, data).subscribe(answer => {
-          this.currUser = data;
-          this.logged = true
+          this.currUser = answer["_id"];
+          this.logged = true;
+          this.loggedStatus.emit(this.logged);
           callback(true);
         });
       } else {

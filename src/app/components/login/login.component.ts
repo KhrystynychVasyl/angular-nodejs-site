@@ -22,8 +22,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.checkLogged();
-    //this.loginService.getUserList();
+    this.checkLogged()
   }
 
   openModal(template: TemplateRef<any>) {
@@ -61,7 +60,6 @@ export class LoginComponent implements OnInit {
     ) {
       _this.checkLogged();
       _this.modalRef.hide();
-      console.log(result);
     });
   }
 

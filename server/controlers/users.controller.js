@@ -3,15 +3,26 @@ let dbCollectionName = "usersList";
 
 exports.findOne = function(req, res, next) {
   db.findOne(dbCollectionName, req.body, function(result) {
-    res.send(result.length > 0);
+    let response = {};
+    if (result.length > 0) {
+      response._id = result[0]._id;
+      response.check = true;
+    }
+    console.log("findOne",response);
+    res.send(response);
   });
 };
 
 exports.create = function(req, res, next) {
   body = { add: { isMany: false, data: req.body } };
   db.create(dbCollectionName, body.add, function(result) {
-    let midValue = result.ops[0];
-    res.send(midValue);
+    let response = {};
+    if (result.length > 0) {
+      response._id = result[0]._id;
+      response.check = true;
+    }
+    console.log('create',response);
+    res.send(response);
   });
 };
 

@@ -10,10 +10,7 @@ let database;
 MongoClient.connect(
   DATABASE_URL,
   {
-    auth: {
-      user: "KorotkieRyki",
-      password: "KorotkieRyki"
-    },
+    auth: { user: "KorotkieRyki", password: "KorotkieRyki" },
     useNewUrlParser: true
   },
   (error, client) => {

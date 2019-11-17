@@ -81,7 +81,7 @@
         placeholder="Confirm password"
         [(ngModel)]="password_confirm"
       />
-      <p *ngIf="pass1 !== pass2">Різні паролі!</p>
+      <p *ngIf="password !== password_confirm">Різні паролі!</p>
       <input
         fxFill
         class="form-control mr-sm-2 my-2"
