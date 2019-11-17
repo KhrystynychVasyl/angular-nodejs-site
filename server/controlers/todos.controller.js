@@ -3,6 +3,7 @@ let dbCollectionName = "todosList";
 
 function getUser(req) {
   [method, path] = [req.route.stack[0].method, req.route.path.split("/")[1]];
+
   let user = "";
   let data = {};
   switch (method) {
@@ -31,6 +32,8 @@ function getUser(req) {
       break;
   }
 
+  //console.log(req, method, path, user, data);
+  //console.log(method, path, user, data);
   return [req, method, path, user, data];
 }
 

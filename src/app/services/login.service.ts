@@ -84,6 +84,7 @@ export class LoginService {
           if (answer) {
             let data = { login: name, password: pass, access: false };
             this.http.post(this.urlTempU, data).subscribe(answer => {
+              
               this.currUser = answer["_id"];
               this.logged = true;
               this.loggedStatus.emit(this.logged);

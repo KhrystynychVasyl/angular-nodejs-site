@@ -2,6 +2,7 @@ let db = require("./MongoDB_CRUD_Operations");
 let dbCollectionName = "keysList";
 
 exports.findOne = function(req, res, next) {
+  console.log("keys_findOne", req.body);
   db.findOne(dbCollectionName, req.body, function(result) {
     res.send(result.length > 0);
   });

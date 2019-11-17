@@ -6,8 +6,11 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./main.component.scss"]
 })
 export class MainComponent implements OnInit {
-  
+  status: boolean = false;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => (this.status = true), 3000);
+  }
 }

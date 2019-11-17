@@ -21,10 +21,10 @@ MongoClient.connect(
   }
 );
 
-
 // MongoClient.connect(uri).then(client => client.db("db").collection("users").find()).then(data => console.log(data)).catch(err => console.log(err));
 
 exports.findAll = function(dbCollectionName, callback) {
+  console.log("MB_FindAll", dbCollectionName);
   database
     .collection(dbCollectionName)
     .find({})
@@ -35,6 +35,7 @@ exports.findAll = function(dbCollectionName, callback) {
 };
 
 exports.create = function(dbCollectionName, body, callback) {
+  console.log("MB_Creat", dbCollectionName, body);
   if (!body.isMany) {
     database
       .collection(dbCollectionName)
@@ -57,6 +58,7 @@ exports.create = function(dbCollectionName, body, callback) {
 };
 
 exports.update = function(dbCollectionName, body, id, callback) {
+  console.log("MB_Upd", dbCollectionName, body, id);
   database
     .collection(dbCollectionName)
     .updateOne({ _id: new ObjectId(id) }, { $set: body.updateNew }, function(
@@ -71,17 +73,18 @@ exports.update = function(dbCollectionName, body, id, callback) {
     });
 };
 
-exports.findOne = function(dbCollectionName, data, callback) {
+exports.findOne = function(dbCollectionName, body, callback) {
+  console.log("MB_FindOne", dbCollectionName, body);
   let find;
   switch (dbCollectionName) {
     case "usersList":
-      find = data;
+      find = body;
       break;
     case "keysList":
-      find = data;
+      find = body;
       break;
     default:
-      find = new ObjectId(data);
+      find = new ObjectId(body);
   }
   database
     .collection(dbCollectionName)
@@ -93,13 +96,25 @@ exports.findOne = function(dbCollectionName, data, callback) {
 };
 
 exports.deleteOne = function(dbCollectionName, body, callback) {
-  database
-    .collection(dbCollectionName)
-    .deleteOne(body.data, function(err, result) {
-      assert.equal(err, null);
-      assert.equal(1, result.result.n);
-      result.connection ? delete result.connection : "";
-      result.message ? delete result.message : "";
-      callback(result);
-    });
+  console.log("MB_Del", dbCollectionName, body);
+
+  let find;
+  switch (dbCollectionName) {
+    case "usersList":
+      find = body;
+      break;
+    case "keysList":
+      find = body;
+      break;
+    default:
+      find = { _id: new ObjectId(body) };
+  }
+
+  database.collection(dbCollectionName).deleteOne(find, function(err, result) {
+    assert.equal(err, null);
+    assert.equal(1, result.result.n);
+    result.connection ? delete result.connection : "";
+    result.message ? delete result.message : "";
+    callback(result);
+  });
 };

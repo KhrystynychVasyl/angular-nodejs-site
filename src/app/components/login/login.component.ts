@@ -58,8 +58,11 @@ export class LoginComponent implements OnInit {
     this.loginService.signIn(fields.name, fields.password, fields.key, function(
       result
     ) {
+
       _this.checkLogged();
       _this.modalRef.hide();
+
+      
     });
   }
 

@@ -8,7 +8,7 @@ exports.findOne = function(req, res, next) {
       response._id = result[0]._id;
       response.check = true;
     }
-    //console.log("findOne_users.controller.js", response);
+    console.log("findOne_users.controller.js", response);
     res.send(response);
   });
 };
@@ -17,11 +17,13 @@ exports.create = function(req, res, next) {
   body = { add: { isMany: false, data: req.body } };
   db.create(dbCollectionName, body.add, function(result) {
     let response = {};
-    if (result.length > 0) {
-      response._id = result[0]._id;
-      response.check = true;
+    if (result.insertedCount) {
+      response["_id"] = result.ops[0]._id;
+      response["check"] = true;
+    } else {
+      response["check"] = false;
     }
-    //console.log('create_users.controller.js',response);
+    console.log("create_users.controller.js", response);
     res.send(response);
   });
 };

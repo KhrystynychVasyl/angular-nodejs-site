@@ -50,7 +50,7 @@ let selectMethodHandler = function(req, res, next) {
 
   let url = req.route.path;
   let method = Object.keys(req.route.methods)[0];
-
+  console.log(url, method);
   return MethodHandler[url][method](req, res, next);
 };
 
