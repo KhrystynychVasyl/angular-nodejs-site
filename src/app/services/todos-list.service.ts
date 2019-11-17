@@ -22,57 +22,73 @@ export class TodosListService {
   pageLoaded: moment.Moment;
 
   constructor(private http: HttpClient, private loginService: LoginService) {
-    this.todosLink;
     this.isLogged = loginService.isLogged;
-    setTimeout(() => {
-      if (this.todosLocalList.length === 0) {
-        this.getHttpTodosList();
-      }
-    }, 1000);
+
+    if (this.todosLocalList.length === 0) {
+      this.getHttpTodosList();
+    }
+
     loginService.loggedStatus.subscribe(check => {
       this.isLogged = check;
       this.getHttpTodosList();
     });
   }
 
-  get todosLink() {
-    if (!this.urlTempT) {
-      let check: boolean;
-      this.http
-        .put(this.API_todosList_URL, { test: true })
-        .subscribe(
-          list => {
-            check = true;
-          },
-          error => {
-            check = false;
-          }
-        )
-        .add(() => {
-          this.urlTempT = check
-            ? this.API_todosList_URL
-            : "http://localhost:5678" + this.API_todosList_URL;
-        });
-      return this.urlTempT;
-    } else {
-      return this.urlTempT;
-    }
-  }
+  // get todosLink() {
+  //   if (!this.urlTempT) {
+  //     let check: boolean;
+  //     this.http
+  //       .put(this.API_todosList_URL, { test: true })
+  //       .subscribe(
+  //         list => {
+  //           check = true;
+  //         },
+  //         error => {
+  //           check = false;
+  //         }
+  //       )
+  //       .add(() => {
+  //         this.urlTempT = check
+  //           ? this.API_todosList_URL
+  //           : "http://localhost:5678" + this.API_todosList_URL;
+  //       });
+  //     return this.urlTempT;
+  //   } else {
+  //     return this.urlTempT;
+  //   }
+  // }
 
   getHttpTodosList() {
-    let url;
-    if (this.isLogged) {
-      url =
-        this.todosLink +
-        "/?user=" +
-        encodeURIComponent(this.loginService.currUserData);
-    } else {
-      url = this.todosLink;
-    }
-    this.http.get<Todo[]>(url).subscribe(list => {
-      this.todosLocalList = list;
-      this.todosListUpdate.emit(true);
-    }).closed;
+    let check: boolean;
+    this.http
+      .get<Todo[]>(this.API_todosList_URL)
+      .subscribe(
+        list => {
+          check = true;
+        },
+        error => {
+          check = false;
+        }
+      )
+      .add(() => {
+        this.urlTempT = check
+          ? this.API_todosList_URL
+          : "http://localhost:5678" + this.API_todosList_URL;
+          
+        let url;
+        if (this.isLogged) {
+          url =
+            this.urlTempT +
+            "/?user=" +
+            encodeURIComponent(this.loginService.currUserData);
+        } else {
+          url = this.urlTempT;
+        }
+        this.http.get<Todo[]>(url).subscribe(list => {
+          this.todosLocalList = list;
+          this.todosListUpdate.emit(true);
+        }).closed;
+      });
   }
 
   putHttpTodosById(_idTodos: string, data: Object) {
