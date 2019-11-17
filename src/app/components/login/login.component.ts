@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
   logged: boolean = false;
   errorMessage: string = "";
   signErrorMessage: string = "";
+  password: string;
+  password_confirm: string;
 
   constructor(
     private loginService: LoginService,

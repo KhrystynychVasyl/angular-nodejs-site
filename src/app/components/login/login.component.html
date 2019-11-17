@@ -71,15 +71,15 @@
         type="password"
         name="password"
         placeholder="password"
-        [(ngModel)]="pass1"
+        [(ngModel)]="password"
       />
       <input
         fxFill
         class="form-control mr-sm-2 my-2"
         type="password"
-        name="password-confirm"
+        name="password_confirm"
         placeholder="Confirm password"
-        [(ngModel)]="pass2"
+        [(ngModel)]="password_confirm"
       />
       <p *ngIf="pass1 !== pass2">Різні паролі!</p>
       <input
@@ -94,7 +94,7 @@
       <div>
         <button
           class="btn btn-success my-sm-5"
-          [disabled]="pass1 !== pass2"
+          [disabled]="password !== password_confirm"
           (click)="signIn(signInForm.value)"
         >
           Sing In
