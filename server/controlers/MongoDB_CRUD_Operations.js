@@ -71,10 +71,21 @@ exports.update = function(dbCollectionName, body, id, callback) {
     });
 };
 
-exports.findOne = function(dbCollectionName, id, callback) {
+exports.findOne = function(dbCollectionName, data, callback) {
+  let find;
+  switch (dbCollectionName) {
+    case "usersList":
+      find = data;
+      break;
+    case "keysList":
+      find = data;
+      break;
+    default:
+      find = new ObjectId(data);
+  }
   database
     .collection(dbCollectionName)
-    .find(new ObjectId(id))
+    .find(find)
     .toArray(function(err, docs) {
       assert.equal(err, null);
       callback(docs);

@@ -4,6 +4,7 @@ const router = express.Router();
 let todos = require("../controlers/todos.controller");
 let users = require("../controlers/users.controller");
 let products = require("../controlers/products.controller");
+let keys = require("../controlers/keys.controller");
 
 let selectMethodHandler = function(req, res, next) {
   MethodHandler = {
@@ -22,7 +23,7 @@ let selectMethodHandler = function(req, res, next) {
     },
     "/users/:id": {
       get: users.findOne,
-      put: users.update,
+      put: users.findOne,
       delete: users.delete
     },
     "/products": {
@@ -33,6 +34,15 @@ let selectMethodHandler = function(req, res, next) {
       get: products.findOne,
       put: products.update,
       delete: products.delete
+    },
+    "/keys": {
+      post: keys.create,
+      get: keys.findAll
+    },
+    "/keys/:id": {
+      get: keys.findOne,
+      put: keys.findOne,
+      delete: keys.delete
     }
   };
 
@@ -41,6 +51,16 @@ let selectMethodHandler = function(req, res, next) {
 
   return MethodHandler[url][method](req, res, next);
 };
+
+router.get("/keys", selectMethodHandler);
+
+router.post("/keys", selectMethodHandler);
+
+router.get("/keys/:id", selectMethodHandler);
+
+router.put("/keys/:id", selectMethodHandler);
+
+router.delete("/keys/:id", selectMethodHandler);
 
 router.get("/users", selectMethodHandler);
 

@@ -1,9 +1,10 @@
 export class User {
+  _id: string;
   id: string = "";
-  name: string = "";
+  login: string = "";
   password: string = "";
   access: boolean = false;
-  constructor(fields) {
+  constructor(fields = {}) {
     Object.assign(this, fields);
   }
 }

@@ -1,11 +1,64 @@
 <section *ngIf="!logged">
+  <form
+    *ngIf="!errorMessage"
+    class="form-inline my-2 my-lg-0"
+    #loginForm="ngForm"
+  >
+    <input
+      class="form-control mr-sm-2"
+      type="text"
+      name="name"
+      ngModel
+      placeholder="Name"
+    />
+    <input
+      class="form-control mr-sm-2 my-2"
+      type="password"
+      name="password"
+      placeholder="password"
+      ngModel
+    />
+    <div>
+      <button
+        class="btn btn-outline-info mr-2 my-2 my-sm-0"
+        (click)="openModal(template)"
+      >
+        Sing In
+      </button>
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        (click)="logIn(loginForm.value)"
+      >
+        Log In
+      </button>
+    </div>
+  </form>
+  <div *ngIf="errorMessage">
+    <p class="my-auto form-control mr-sm-2">{{ errorMessage }}</p>
+  </div>
+</section>
+<button *ngIf="logged" class="btn btn-danger" (click)="logOut()">
+  Log Out
+</button>
+<!-- 
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
+
+<ng-template #template>
+  <!-- <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> -->
+  <div class="modal-body" *ngIf="!logged">
     <form
       *ngIf="!errorMessage"
       class="form-inline my-2 my-lg-0"
-      #loginForm="ngForm"
-      (ngSubmit)="signIn(loginForm.value)"
+      #signInForm="ngForm"
+      fxLayout="column"
     >
       <input
+        fxFill
         class="form-control mr-sm-2"
         type="text"
         name="name"
@@ -13,21 +66,40 @@
         placeholder="Name"
       />
       <input
-        class="form-control mr-sm-2"
+        fxFill
+        class="form-control mr-sm-2 my-2"
         type="password"
         name="password"
         placeholder="password"
+        [(ngModel)]="pass1"
+      />
+      <input
+        fxFill
+        class="form-control mr-sm-2 my-2"
+        type="password"
+        name="password-confirm"
+        placeholder="Confirm password"
+        [(ngModel)]="pass2"
+      />
+      <p *ngIf="pass1 !== pass2">Різні паролі!</p>
+      <input
+        fxFill
+        class="form-control mr-sm-2 my-2"
+        type="password"
+        name="key"
+        placeholder="Key"
         ngModel
       />
-  
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-        Sign In
-      </button>
+      <p *ngIf="signErrorMessage" class="m-auto">{{ signErrorMessage }}</p>
+      <div>
+        <button
+          class="btn btn-success my-sm-5"
+          [disabled]="pass1 !== pass2"
+          (click)="signIn(signInForm.value)"
+        >
+          Sing In
+        </button>
+      </div>
     </form>
-    <div *ngIf="errorMessage">
-      <p class="my-auto form-control mr-sm-2">{{ errorMessage }}</p>
-    </div>
-  </section>
-  <button *ngIf="logged" class="btn btn-danger" (click)="signOut()">
-    Sign Out
-  </button>
+  </div>
+</ng-template>
