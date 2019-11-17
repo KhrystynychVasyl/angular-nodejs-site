@@ -13,15 +13,18 @@ import * as moment from "moment";
 export class ClockComponent implements OnInit {
   pageLoaded: moment.Moment;
   time: Observable<string>;
-
   constructor() {}
 
   ngOnInit() {
-    this.time = interval(1000 * 60).pipe(
+    this.getTime();
+  }
+
+  getTime() {
+    this.time = interval(1000).pipe(
       // why you need 1s interval with HH:mm time format simply update it every minute not every second.
       map(() => {
         this.pageLoaded = moment(new Date()); // you need the value of now not the value of the initialized time.
-        return this.pageLoaded.format("HH:mm A");
+        return this.pageLoaded.format("HH:mm:ss A");
       })
     );
   }

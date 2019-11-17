@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <a routerLink="/home" class="navbar-brand">MyLoGo</a>
   <button
     class="navbar-toggler"
@@ -18,15 +18,11 @@
     [ngClass]="status ? 'collapse' : ''"
   >
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a routerLink="/home" routerLinkActive="active" class="nav-link"
-          >Home
-        </a>
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/home" class="nav-link">Home </a>
       </li>
-      <li class="nav-item">
-        <a routerLink="/todo" routerLinkActive="active" class="nav-link"
-          >ToDo</a
-        >
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/todo" class="nav-link">ToDo</a>
       </li>
       <li class="nav-item">
         <a routerLinkActive="active" class="nav-link">Products</a>

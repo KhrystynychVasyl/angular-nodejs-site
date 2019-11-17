@@ -21,6 +21,9 @@ MongoClient.connect(
   }
 );
 
+
+// MongoClient.connect(uri).then(client => client.db("db").collection("users").find()).then(data => console.log(data)).catch(err => console.log(err));
+
 exports.findAll = function(dbCollectionName, callback) {
   database
     .collection(dbCollectionName)

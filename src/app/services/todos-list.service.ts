@@ -34,30 +34,6 @@ export class TodosListService {
     });
   }
 
-  // get todosLink() {
-  //   if (!this.urlTempT) {
-  //     let check: boolean;
-  //     this.http
-  //       .put(this.API_todosList_URL, { test: true })
-  //       .subscribe(
-  //         list => {
-  //           check = true;
-  //         },
-  //         error => {
-  //           check = false;
-  //         }
-  //       )
-  //       .add(() => {
-  //         this.urlTempT = check
-  //           ? this.API_todosList_URL
-  //           : "http://localhost:5678" + this.API_todosList_URL;
-  //       });
-  //     return this.urlTempT;
-  //   } else {
-  //     return this.urlTempT;
-  //   }
-  // }
-
   getHttpTodosList() {
     let check: boolean;
     this.http
