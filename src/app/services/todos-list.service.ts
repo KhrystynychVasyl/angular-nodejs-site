@@ -76,7 +76,8 @@ export class TodosListService {
   }
 
   putHttpTodosById(_idTodos: string, data: Object) {
-    this.http.put<Object>(this.urlTempT + "/" + _idTodos, data).subscribe().closed;
+    this.http.put<Object>(this.urlTempT + "/" + _idTodos, data).subscribe()
+      .closed;
   }
 
   postHttpTodos(todo: Object) {
@@ -86,7 +87,13 @@ export class TodosListService {
   }
 
   deleteHttpTodos(_id: string) {
-    this.http.delete(this.urlTempT + "/" + _id).subscribe().closed;
+    let url = this.urlTempT + "/" + _id;
+    if (this.loginService.currUserData) {
+      url = url + "-" + this.loginService.currUserData;
+    } else {
+      url = url + "-" + "JohnDoe";
+    }
+    this.http.delete(url).subscribe().closed;
   }
 
   getTodosList(): Todo[] {
@@ -106,7 +113,7 @@ export class TodosListService {
     let time = moment(new Date()).format("HH:mm:ss A");
     todo.time = moment(new Date());
     todo.title = todo.title + "\n" + time;
-    let body = { data: todo, _id: this.loginService.currUserData };
+    let body = { data: todo, _idUser: this.loginService.currUserData };
     this.postHttpTodos(body);
   }
 

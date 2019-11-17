@@ -22,8 +22,14 @@ function getUser(req) {
       user = "_" + req.body._idUser;
       data = req.body.data;
       break;
+    case "delete":
+      if (req.params._idUser === "JohnDoe") {
+        user = "_";
+      } else {
+        user = "_" + req.params._idUser;
+      }
+      break;
   }
-  console.log(req, method, path, user, data);
 
   return [req, method, path, user, data];
 }
@@ -59,7 +65,8 @@ exports.findOne = function(req, res, next) {
 };
 
 exports.delete = function(req, res, next) {
-  db.deleteOne(dbCollectionName, req.params.id, function(result) {
+  [req, method, path, user, data] = getUser(req);
+  db.deleteOne(dbCollectionName + user, req.params.id, function(result) {
     res.end();
   });
 };

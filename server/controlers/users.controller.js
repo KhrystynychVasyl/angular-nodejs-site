@@ -8,7 +8,7 @@ exports.findOne = function(req, res, next) {
       response._id = result[0]._id;
       response.check = true;
     }
-    console.log("findOne",response);
+    //console.log("findOne_users.controller.js", response);
     res.send(response);
   });
 };
@@ -21,7 +21,7 @@ exports.create = function(req, res, next) {
       response._id = result[0]._id;
       response.check = true;
     }
-    console.log('create',response);
+    //console.log('create_users.controller.js',response);
     res.send(response);
   });
 };

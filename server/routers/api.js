@@ -14,7 +14,9 @@ let selectMethodHandler = function(req, res, next) {
     },
     "/todos/:id": {
       get: todos.findOne,
-      put: todos.update,
+      put: todos.update
+    },
+    "/todos/:id-:_idUser": {
       delete: todos.delete
     },
     "/users": {
@@ -80,7 +82,7 @@ router.get("/todos/:id", selectMethodHandler);
 
 router.put("/todos/:id", selectMethodHandler);
 
-router.delete("/todos/:id", selectMethodHandler);
+router.delete("/todos/:id-:_idUser", selectMethodHandler);
 
 router.get("/products", selectMethodHandler);
 
