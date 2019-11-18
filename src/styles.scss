@@ -2,6 +2,8 @@
 @import "@angular/material/prebuilt-themes/deeppurple-amber.css";
 html,
 body {
+  max-width: 2540px;
+  margin: auto;
   height: 100%;
   min-height: 100%;
 }

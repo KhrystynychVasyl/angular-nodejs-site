@@ -1,34 +1,48 @@
 <section *ngIf="!logged">
   <form
     *ngIf="!errorMessage"
-    class="form-inline my-2 my-lg-0"
+    class="m-2"
     #loginForm="ngForm"
+    fxLayout="column"
+    fxLayout.gt-xs="row"
   >
-    <input
-      class="form-control mr-sm-2"
-      type="text"
-      name="name"
-      ngModel
-      placeholder="Name"
-    />
-    <input
-      class="form-control mr-sm-2 my-2"
-      type="password"
-      name="password"
-      placeholder="password"
-      ngModel
-    />
-    <div>
+    <div
+      fxLayoutAlign="space-around"
+      fxLayout.lt-xs="column"
+      fxLayout.sm="row"
+      fxLayout="column"
+      class="p-2"
+      fxLayoutGap="6px"
+    >
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        ngModel
+        placeholder="Name"
+      />
+      <input
+        class="form-control"
+        type="password"
+        name="password"
+        placeholder="password"
+        ngModel
+      />
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.gt-sm="column"
+      fxLayoutAlign.lt-lg="space-around"
+      fxLayoutGap="6px"
+      class="p-2"
+    >
       <button
-        class="btn btn-outline-success mr-2 my-2 my-sm-0"
+        class="btn btn-outline-success p-2"
         (click)="logIn(loginForm.value)"
       >
         Log In
       </button>
-      <button
-        class="btn btn-outline-info  my-2 my-sm-0"
-        (click)="openModal(template)"
-      >
+      <button class="btn btn-outline-info p-2" (click)="openModal(template)">
         Sing In
       </button>
     </div>
@@ -38,8 +52,8 @@
   </div>
 </section>
 <button *ngIf="logged" class="btn btn-danger mr-2" (click)="logOut()">
-    Log Out
-  </button>
+  Log Out
+</button>
 <!-- <div class="form-inline">
     <button *ngIf="logged" class="btn btn-danger mr-2" (click)="logOut()">
         Log Out
@@ -51,6 +65,42 @@
 
 <!-- 
 <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
+
+<!-- 
+<form
+*ngIf="!errorMessage"
+class="form-inline my-2 my-lg-0"
+#loginForm="ngForm"
+>
+<input
+  class="form-control mr-sm-2"
+  type="text"
+  name="name"
+  ngModel
+  placeholder="Name"
+/>
+<input
+  class="form-control mr-sm-2 my-2"
+  type="password"
+  name="password"
+  placeholder="password"
+  ngModel
+/>
+<div>
+  <button
+    class="btn btn-outline-success mr-2 my-2 my-sm-0"
+    (click)="logIn(loginForm.value)"
+  >
+    Log In
+  </button>
+  <button
+    class="btn btn-outline-info  my-2 my-sm-0"
+    (click)="openModal(template)"
+  >
+    Sing In
+  </button>
+</div>
+</form> -->
 
 <ng-template #template>
   <!-- <div class="modal-header">

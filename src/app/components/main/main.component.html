@@ -1,9 +1,9 @@
 <div fxflexFill fxLayout="column">
   <div fxLayout="row">
-    <div fxFlex="1 1 80%">
+    <div fxFlex="1 1 80%" fxFlex.gt-sm="1 1 90%">
       <app-header></app-header>
     </div>
-    <div fxFlex="1 1 20%" fxLayoutAlign>
+    <div fxFlex="1 1 20%" fxFlex.gt-sm="1 1 10%" fxLayoutAlign>
       <button fxFill class="btn btn-success" fxLayout fxLayoutAlign="space-around">
         <mat-icon>shopping_cart</mat-icon>Cart
       </button>
@@ -26,7 +26,7 @@
           Perspiciatis amet, quo id ipsa omnis tempora!
         </span>
       </div>
-      <div fxFlex.gt-xs="65">
+      <div fxFlex.gt-xs="80">
         <router-outlet></router-outlet>
       </div>
     </div>
