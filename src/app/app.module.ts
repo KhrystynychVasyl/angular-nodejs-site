@@ -19,6 +19,8 @@ import { MaterialModule } from "./material/material.module";
 import { TodosListService } from "./services/todos-list.service";
 import { HighlightPipe } from "./services/pipes/highlight.pipe";
 import { ClockComponent } from './components/clock/clock.component';
+import { ProductComponent } from './components/product/product.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ClockComponent } from './components/clock/clock.component';
     LoginComponent,
     TodoComponent,
     HighlightPipe,
-    ClockComponent
+    ClockComponent,
+    ProductComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

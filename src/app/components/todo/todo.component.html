@@ -50,7 +50,7 @@
           <span
             fxLayout="row"
             fxLayoutGap="5px"
-            fxLayoutAlign="start center"
+            fxLayoutAlign="center center"
             *ngIf="
               searchText
                 ? todo.title.toLowerCase().includes(searchText.toLowerCase())
@@ -59,8 +59,7 @@
           >
             <div
               class="todo-text"
-              fxFlex="320px"
-              fxFlex.gt-xs="570px"
+              fxFlex="0 1 90"
               [ngClass]="todo.complete ? 'completeTodo' : ''"
               (click)="toggleComplete(todo)"
               fxLayout="row"

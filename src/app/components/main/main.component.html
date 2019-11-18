@@ -1,19 +1,28 @@
 <div fxflexFill fxLayout="column">
   <app-header></app-header>
   <div fxLayout="column">
-    <div class="some" fxLayout="column" fxLayoutGap="5px" fxLayout.xs="column">
-      <div fxFlex="25" class="aside" fxFlexOrder="2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quisquam
-        porro quasi dignissimos soluta. Architecto maxime recusandae itaque
-        doloremque! Non similique, tempore quos odio laborum saepe voluptatem
-        amet at. Neque!
+    <div class="some" fxLayout="row" fxLayoutGap="5px" fxLayout.lt-sm="column">
+      <div fxFlex.gt-xs="20" class="aside" fxFlexOrder.lt-sm="2">
+        <span>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
+          quae beatae ut ipsum assumenda atque rem, vel est explicabo. Nisi
+          ducimus est excepturi laudantium fuga delectus quasi impedit, id illum
+          quidem, tenetur recusandae similique eligendi cupiditate dicta unde
+          voluptatibus porro odio ab totam. Dolore voluptatibus, dicta provident
+          debitis, vero ratione vitae nesciunt molestiae dolor quia fugiat
+          magnam quaerat nobis? Ea voluptates eveniet non alias libero. Magni
+          consequatur nobis ex adipisci, obcaecati sint veniam corrupti sunt sed
+          mollitia placeat rem ipsam eaque officiis omnis ullam nesciunt
+          eligendi, praesentium similique, aut accusamus nam dolorum minima.
+          Perspiciatis amet, quo id ipsa omnis tempora!
+        </span>
       </div>
-      <router-outlet fxfill></router-outlet>
+      <div fxFlex.gt-xs="65">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-    <div fxLayout="row">
+    <div fxLayout="row" fxFlex="50">
       <app-footer fxLayoutAlign="center center" fxFlex="auto"></app-footer>
     </div>
   </div>
 </div>
-
-

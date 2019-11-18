@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
       _this.checkLogged();
       _this.modalRef.hide();
 
-      
+
+
     });
   }
 
