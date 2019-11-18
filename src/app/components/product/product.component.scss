@@ -1,9 +1,14 @@
 .container {
-  margin-top: 5px;
+  margin: 5px;
+}
+.card {
+  margin: auto;
 }
 
 .form-background {
-  margin: 0;
+  border: 1px solid #ced4da;
+  padding: 5px;
+  margin: 0px 5px;
   .btn {
     width: 80px;
   }
@@ -13,7 +18,7 @@
 
 .products-background {
   border: 1px solid #ced4da;
-  margin-top: 5px;
+  margin: 5px;
   border-radius: 5px;
   background-color: rgb(247, 247, 247);
 }

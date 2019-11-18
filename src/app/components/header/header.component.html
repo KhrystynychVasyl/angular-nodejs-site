@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <a routerLink="/home" class="navbar-brand">MyLoGo</a>
   <app-clock fxShow.gt-sm="false" class="mr-auto font-weight-bold"></app-clock>
+
   <button
-    class="navbar-toggler"
+    class="navbar-toggler ml-auto mr-2"
     type="button"
     (click)="status = !status"
     data-toggle="collapse"
@@ -13,6 +14,7 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div
     id="navbarId_1"
     class=" navbar-collapse"
@@ -59,4 +61,3 @@
     <app-login></app-login>
   </div>
 </nav>
-

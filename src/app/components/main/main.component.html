@@ -1,5 +1,14 @@
 <div fxflexFill fxLayout="column">
-  <app-header></app-header>
+  <div fxLayout="row">
+    <div fxFlex="1 1 80%">
+      <app-header></app-header>
+    </div>
+    <div fxFlex="1 1 20%" fxLayoutAlign>
+      <button fxFill (click)="logged = !logged" class="btn btn-success" fxLayout fxLayoutAlign="space-around">
+        <mat-icon>shopping_cart</mat-icon>Cart
+      </button>
+    </div>
+  </div>
   <div fxLayout="column">
     <div class="some" fxLayout="row" fxLayoutGap="5px" fxLayout.lt-sm="column">
       <div fxFlex.gt-xs="20" class="aside" fxFlexOrder.lt-sm="2">

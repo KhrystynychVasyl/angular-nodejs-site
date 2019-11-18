@@ -3,7 +3,15 @@ li {
 }
 
 .main-class {
-    background-color: rgb(247, 247, 247);
+  margin: 2px;
+  padding: 2px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  background-color: rgb(247, 247, 247);
+}
+
+.container-todo {
+  margin: 5px;
 }
 
 ul {

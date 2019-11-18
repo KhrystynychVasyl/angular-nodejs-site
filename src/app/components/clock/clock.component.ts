@@ -20,7 +20,7 @@ export class ClockComponent implements OnInit {
   }
 
   getTime() {
-    this.time = interval(1000*60).pipe(
+    this.time = interval(1000).pipe(
       // why you need 1s interval with HH:mm time format simply update it every minute not every second.
       map(() => {
         this.pageLoaded = moment(new Date()); // you need the value of now not the value of the initialized time.

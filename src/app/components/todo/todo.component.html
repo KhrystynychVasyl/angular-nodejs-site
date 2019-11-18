@@ -1,96 +1,99 @@
-<span fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px" class="main-class">
-  <header fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
-    <section
-      fxLayout="row"
-      fxLayoutGap="5px"
-      fxLayoutAlign="space-between center"
-      class="input-width"
-    >
-      <span fxFlex="220px" fxLayoutAlign="center center">
-        <input
-          class="form-control"
-          placeholder="What you want ToDo?"
-          type="text"
-          [(ngModel)]="newTodo.title"
-          (keyup.enter)="addTodo()"
-        />
-      </span>
-      <button (click)="addTodo()" fxFlex="60px" class="btn btn-sm btn-success">
-        Add
-      </button>
-    </section>
-    <section
-      fxLayout="row"
-      fxLayoutGap="5px"
-      fxLayoutAlign="space-between center"
-      class="input-width"
-    >
-      <span fxFlex="220px" fxLayoutAlign="center center">
-        <input
-          class="form-control"
-          type="text"
-          [(ngModel)]="searchText"
-          placeholder="Search in ToDo"
-      /></span>
-
-      <button
-        [disabled]="!searchText"
-        (click)="searchText = ''"
-        fxFlex="60px"
-        class="btn btn-sm btn-warning"
-      >
-        Clear
-      </button>
-    </section>
-  </header>
-  <section>
-    <span *ngIf="todosList.length > 0">
-      <span fxLayout="column" fxLayoutGap="8px">
-        <ng-container *ngFor="let todo of todosList">
-          <span
+<div class="container-todo">
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="5px" class="main-class">
+        <header fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+          <section
             fxLayout="row"
             fxLayoutGap="5px"
-            fxLayoutAlign="center center"
-            *ngIf="
-              searchText
-                ? todo.title.toLowerCase().includes(searchText.toLowerCase())
-                : true
-            "
+            fxLayoutAlign="space-between center"
+            class="input-width"
           >
-            <div
-              class="todo-text"
-              fxFlex="0 1 90"
-              [ngClass]="todo.complete ? 'completeTodo' : ''"
-              (click)="toggleComplete(todo)"
-              fxLayout="row"
-              fxLayoutAlign="space-between center"
-              fxLayoutGap="5px"
+            <span fxFlex="220px" fxLayoutAlign="center center">
+              <input
+                class="form-control"
+                placeholder="What you want ToDo?"
+                type="text"
+                [(ngModel)]="newTodo.title"
+                (keyup.enter)="addTodo()"
+              />
+            </span>
+            <button (click)="addTodo()" fxFlex="60px" class="btn btn-sm btn-success">
+              Add
+            </button>
+          </section>
+          <section
+            fxLayout="row"
+            fxLayoutGap="5px"
+            fxLayoutAlign="space-between center"
+            class="input-width"
+          >
+            <span fxFlex="220px" fxLayoutAlign="center center">
+              <input
+                class="form-control"
+                type="text"
+                [(ngModel)]="searchText"
+                placeholder="Search in ToDo"
+            /></span>
+      
+            <button
+              [disabled]="!searchText"
+              (click)="searchText = ''"
+              fxFlex="60px"
+              class="btn btn-sm btn-warning"
             >
-              <mat-icon *ngIf="!todo.complete"
-                >check_box_outline_blank</mat-icon
-              >
-              <mat-icon *ngIf="todo.complete">check_box</mat-icon>
-              <span [innerHTML]="todo.title | highlight: searchText"></span>
-              <button
-                fxFlex="60px"
-                [disabled]="!todo.complete"
-                (click)="deleteTodo(todo)"
-                class="btn btn-sm btn-danger"
-              >
-                Delete
-              </button>
-            </div>
+              Clear
+            </button>
+          </section>
+        </header>
+        <section>
+          <span *ngIf="todosList.length > 0">
+            <span fxLayout="column" fxLayoutGap="8px">
+              <ng-container *ngFor="let todo of todosList">
+                <span
+                  fxLayout="row"
+                  fxLayoutGap="5px"
+                  fxLayoutAlign="center center"
+                  *ngIf="
+                    searchText
+                      ? todo.title.toLowerCase().includes(searchText.toLowerCase())
+                      : true
+                  "
+                >
+                  <div
+                    class="todo-text"
+                    fxFlex="0 1 90"
+                    [ngClass]="todo.complete ? 'completeTodo' : ''"
+                    (click)="toggleComplete(todo)"
+                    fxLayout="row"
+                    fxLayoutAlign="space-between center"
+                    fxLayoutGap="5px"
+                  >
+                    <mat-icon *ngIf="!todo.complete"
+                      >check_box_outline_blank</mat-icon
+                    >
+                    <mat-icon *ngIf="todo.complete">check_box</mat-icon>
+                    <span [innerHTML]="todo.title | highlight: searchText"></span>
+                    <button
+                      fxFlex="60px"
+                      [disabled]="!todo.complete"
+                      (click)="deleteTodo(todo)"
+                      class="btn btn-sm btn-danger"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </span>
+              </ng-container>
+            </span>
           </span>
-        </ng-container>
-      </span>
-    </span>
-  </section>
-  <footer *ngIf="todosList.length > 0">
-    <div class="total-info">
-      <span>
-        <strong> Total: {{ todosList.length }} </strong><br />
-        <strong>Complete: {{ countCompleteTodo }}</strong>
-      </span>
-    </div>
-  </footer>
-</span>
+        </section>
+        <footer *ngIf="todosList.length > 0">
+          <div class="total-info">
+            <span>
+              <strong> Total: {{ todosList.length }} </strong><br />
+              <strong>Complete: {{ countCompleteTodo }}</strong>
+            </span>
+          </div>
+        </footer>
+      </div>
+      
+</div>

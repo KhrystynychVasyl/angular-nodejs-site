@@ -1,8 +1,8 @@
 <div class="container"></div>
 <div fxLayout="column" fxLayoutAlign="centre centre">
   <div>
-    <div class="form-control form-background" fxLayout>
-      <input type="text" class="form-control" placeholder="Search" /><button
+    <div class="form-background sticky-top" fxLayout>
+      <input type="text" class="form-control mr-2" placeholder="Search" /><button
         class="btn btn-primary"
       >
         Search
@@ -12,8 +12,9 @@
 
   <div
     fxLayout="row wrap"
-    fxLayoutAlign="start center"
+    fxLayoutAlign.gt-sm="start center"
     fxFlex.lt-sm="column"
+    fxLayoutAlign.lt-sm="center center"
     class="products-background"
   >
     <ng-container *ngFor="let _ of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
