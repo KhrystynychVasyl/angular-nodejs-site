@@ -1,3 +1,4 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { Observable } from "rxjs";
 import { Product } from "./classes/product";
@@ -8,6 +9,8 @@ import { Product } from "./classes/product";
 export class ProductsListService {
   @Output() modalTrigger = new EventEmitter<boolean>();
   currProduct: Product;
+  readonly API_productsList_URL = "/public/";
+  private urlTempP: string = "";
   arrProductsList: Product[] = [
     {
       id: 1,
@@ -79,18 +82,19 @@ export class ProductsListService {
     return Math.floor(Math.random() * 8.99);
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getProductsList(): Observable<Product[]> {
     return new Observable(someStream => {
+      this.getHttpProductsList();
       setTimeout(
         () =>
           someStream.next(
             new Array(27)
-              .fill(this.arrProductsList[this.random])
+              .fill(() => this.arrProductsList[this.random])
               .map(el => (el = this.arrProductsList[this.random]))
           ),
-        100
+        3000
       );
       // setInterval(
       //   () =>
@@ -118,6 +122,30 @@ export class ProductsListService {
       //   10000
       // );
     });
+  }
+
+  getHttpProductsList() {
+    let check: boolean;
+    this.http
+      .get(this.API_productsList_URL)
+      .subscribe(
+        list => {
+          check = true;
+        },
+        error => {
+          check = false;
+        }
+      )
+      .add(() => {
+        this.urlTempP = check
+          ? this.API_productsList_URL
+          : "http://localhost:5678" + this.API_productsList_URL;
+
+        this.arrProductsList = this.arrProductsList.map(el => {
+          el.imageUrl = this.urlTempP + el.imageUrl;
+          return el;
+        });
+      });
   }
 
   infoCurrProductModal(product: Product) {

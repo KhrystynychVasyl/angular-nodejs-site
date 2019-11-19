@@ -7,22 +7,30 @@
 
 .product-card-image {
   margin: auto;
-
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 1px rgb(116, 13, 13);
   height: 200px;
+  max-width: 94%;
   img {
     border-radius: 5px;
-    max-height: 170px;
+    max-height: 190px;
     max-width: 98%;
   }
 }
+.card-title{
+  margin: auto;
+  width: 90%;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 2px rgb(206, 189, 189);
+}
 
 .product-card {
-  box-shadow: 1px 1px 1px grey;
+  box-shadow: 1px 1px 4px 2px grey;
   border-radius: 4px;
   background-color: #ffffff;
   margin: 5px;
   max-width: 550px;
-  height: 450px;
+  height: 400px;
   .card-text-center {
     text-align: center;
     min-height: 100px;

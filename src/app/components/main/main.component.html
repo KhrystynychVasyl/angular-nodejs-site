@@ -1,24 +1,26 @@
 <div fxflexFill fxLayout="column">
   <div fxLayout="row">
-    <div fxFlex="1 1 80%" fxFlex.gt-sm="1 1 90%">
+    <div fxFlex="95" fxFlex.gt-sm="90">
       <app-header></app-header>
     </div>
-    <div fxFlex="1 1 20%" fxFlex.gt-sm="1 1 10%" fxLayoutAlign>
-      <button fxFill class="btn btn-success" fxLayout fxLayoutAlign="space-around">
+    <div fxFlex="80px" fxFlex.gt-sm="120px" fxFlex.gt-md="160px" fxLayoutAlign>
+      <button
+        fxFill
+        class="btn btn-success"
+        fxLayout
+        fxLayoutAlign="space-around"
+      >
         <mat-icon>shopping_cart</mat-icon>Cart
       </button>
     </div>
   </div>
   <div fxLayout="column" fxFill>
-
-      <router-outlet fxFill></router-outlet>
+    <router-outlet fxFill></router-outlet>
     <div fxLayout="row" fxFlex="50px">
       <app-footer fxLayoutAlign="center center" fxFlex="auto"></app-footer>
     </div>
   </div>
 </div>
-
-
 
 <!-- <div fxflexFill fxLayout="column">
     <div fxLayout="row">
@@ -57,4 +59,3 @@
       </div>
     </div>
   </div> -->
-  
