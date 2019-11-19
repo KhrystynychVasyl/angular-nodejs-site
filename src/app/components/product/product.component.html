@@ -19,6 +19,7 @@
     fxLayoutAlign="centre centre"
     fxFlexOrder="1"
     fxFlexOrder.gt-sm="2"
+    fxFlex="82.5"
   >
     <div>
       <div class="form-background" fxLayout>
@@ -42,8 +43,10 @@
       <ng-container *ngFor="let productItem of productsList | async">
         <app-product-card
           *ngIf="
-          productsListSearch
-              ? productItem.title.toLowerCase().includes(productsListSearch.toLowerCase())
+            productsListSearch
+              ? productItem.title
+                  .toLowerCase()
+                  .includes(productsListSearch.toLowerCase())
               : true
           "
           [productCardText]="productsListSearch"

@@ -86,37 +86,37 @@ export class ProductsListService {
       setTimeout(
         () =>
           someStream.next(
-            new Array(33)
+            new Array(3)
               .fill(this.arrProductsList[this.random])
               .map(el => (el = this.arrProductsList[this.random]))
           ),
         100
       );
-      setInterval(
-        () =>
-          someStream.next([
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random],
-            this.arrProductsList[this.random]
-          ]),
-        30000
-      );
+      // setInterval(
+      //   () =>
+      //     someStream.next([
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random],
+      //       this.arrProductsList[this.random]
+      //     ]),
+      //   10000
+      // );
     });
   }
 
