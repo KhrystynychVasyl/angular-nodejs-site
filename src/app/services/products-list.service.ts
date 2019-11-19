@@ -78,8 +78,6 @@ export class ProductsListService {
     }
   ];
 
-  arrTemp: Product[] = [];
-
   get random() {
     return Math.floor(Math.random() * 8.99);
   }
@@ -88,13 +86,15 @@ export class ProductsListService {
 
   getProductsList(): Observable<Product[]> {
     return new Observable(someStream => {
-      this.getHttpProductsList();
+      if (this.urlTempP.length === 0) {
+        this.getHttpProductsList();
+      }
       setTimeout(
         () =>
           someStream.next(
             new Array(27)
-              .fill(() => this.arrTemp[this.random])
-              .map(el => (el = this.arrTemp[this.random]))
+              .fill(() => this.arrProductsList[this.random])
+              .map(el => (el = this.arrProductsList[this.random]))
           ),
         3000
       );
@@ -143,7 +143,7 @@ export class ProductsListService {
           ? this.API_productsList_URL
           : "http://localhost:5678" + this.API_productsList_URL;
 
-        this.arrTemp = this.arrProductsList.map(el => {
+        this.arrProductsList = this.arrProductsList.map(el => {
           el.imageUrl = this.urlTempP + el.imageUrl;
           return el;
         });
