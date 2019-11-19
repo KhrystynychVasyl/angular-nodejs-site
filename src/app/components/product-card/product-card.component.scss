@@ -1,18 +1,19 @@
 .product-container {
   margin: 3px 5px;
-  padding: 2px;
-  border:1px solid #ced4da;
+  padding: 0px;
+  border: 1px solid #ced4da;
   border-radius: 10px;
-  
+  height: 550px;
+}
+.cardTitle {
+}
+.example-card {
+  margin: 10px;
+  max-width: 550px;
+  height: 530px;
 }
 
-
-.example-card {
-    margin: 5px;
-    max-width: 550px;
-  }
-  
-  .example-header-image {
-    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-    background-size: cover;
-  }
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}

@@ -1,31 +1,78 @@
-<div class="container"></div>
-<div fxLayout="column" fxLayoutAlign="centre centre">
-  <div>
-    <div class="form-background sticky-top" fxLayout>
-      <input type="text" class="form-control mr-2" placeholder="Search" /><button
-        class="btn btn-primary"
-      >
-        Search
-      </button>
+<div class="product-container">
+  <div fxLayout="column" fxLayoutAlign="centre centre">
+    <div>
+      <div class="form-background sticky-top" fxLayout>
+        <input
+          type="text"
+          class="form-control mr-2"
+          placeholder="Search"
+          [(ngModel)]="productsListSearch"
+        /><button
+          class="btn btn-primary"
+          (click)="openProductModal(productModalTemplate)"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+    <div
+      fxLayout="row wrap"
+      fxLayoutAlign.gt-sm="start center"
+      fxFlex.lt-sm="column"
+      fxLayoutAlign.lt-sm="center center"
+      class="products-background"
+    >
+      <ng-container *ngFor="let prodImg of productImage">
+        <app-product-card
+          [productCardText]="productsListSearch"
+          [prodImgInput]="prodImg"
+          fxFlex="0 1 25%"
+          fxFlex.lt-lg="0 1 33%"
+          fxFlex.lt-md="0 1 50%"
+          fxFlex.lt-sm="96"
+        ></app-product-card>
+        <div></div>
+      </ng-container>
     </div>
   </div>
-
-  <div
-    fxLayout="row wrap"
-    fxLayoutAlign.gt-sm="start center"
-    fxFlex.lt-sm="column"
-    fxLayoutAlign.lt-sm="center center"
-    class="products-background"
-  >
-    <ng-container *ngFor="let _ of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]">
-      <app-product-card
-        fxFlex="0 1 25%"
-        fxFlex.lt-lg="0 1 33%"
-        fxFlex.lt-md="0 1 50%"
-        fxFlex.lt-sm="96"
-      ></app-product-card>
-
-      <div></div>
-    </ng-container>
-  </div>
 </div>
+<ng-template #productModalTemplate>
+  <div
+    class="modal-header text-center"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
+    <h4 class="modal-title">Product Info</h4>
+    <!-- <button
+      type="button"
+      class="btn-light ml-auto"
+      aria-label="Close"
+      (click)="productModalRef.hide()"
+      fxLayout
+      fxLayoutAlign="space-around"
+    >
+      <mat-icon>close</mat-icon>
+    </button> -->
+  </div>
+
+  <div class="modal-body">
+    <mat-card class="example-card text-center">
+      <img
+        mat-card-image
+        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        alt="Photo of a Shiba Inu"
+      />
+      <mat-card-content>
+        <h4 class="card-title">SomeTitle</h4>
+        <p class="card-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quia
+          nostrum doloremque et ab consequuntur.
+        </p>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="end center">
+        <button class="btn btn-lg btn-success mr-2" mat-button>Buy</button>
+        <button class="btn btn-lg btn-danger" mat-button>Close</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>
