@@ -3,17 +3,28 @@
   padding: 0px;
   border: 1px solid #ced4da;
   border-radius: 10px;
-  height: 550px;
-}
-.cardTitle {
-}
-.example-card {
-  margin: 10px;
-  max-width: 550px;
-  height: 530px;
 }
 
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
+.product-card-image {
+  margin: auto;
+
+  height: 200px;
+  img {
+    border-radius: 5px;
+    max-height: 170px;
+    max-width: 98%;
+  }
+}
+
+.product-card {
+  box-shadow: 1px 1px 1px grey;
+  border-radius: 4px;
+  background-color: #ffffff;
+  margin: 5px;
+  max-width: 550px;
+  height: 450px;
+  .card-text-center {
+    text-align: center;
+    min-height: 100px;
+  }
 }

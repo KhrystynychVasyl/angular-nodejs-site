@@ -9,29 +9,52 @@
       </button>
     </div>
   </div>
-  <div fxLayout="column">
-    <div class="some" fxLayout="row" fxLayoutGap="5px" fxLayout.lt-sm="column">
-      <div fxFlex.gt-xs="20" class="aside" fxFlexOrder.lt-sm="2">
-        <span>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-          quae beatae ut ipsum assumenda atque rem, vel est explicabo. Nisi
-          ducimus est excepturi laudantium fuga delectus quasi impedit, id illum
-          quidem, tenetur recusandae similique eligendi cupiditate dicta unde
-          voluptatibus porro odio ab totam. Dolore voluptatibus, dicta provident
-          debitis, vero ratione vitae nesciunt molestiae dolor quia fugiat
-          magnam quaerat nobis? Ea voluptates eveniet non alias libero. Magni
-          consequatur nobis ex adipisci, obcaecati sint veniam corrupti sunt sed
-          mollitia placeat rem ipsam eaque officiis omnis ullam nesciunt
-          eligendi, praesentium similique, aut accusamus nam dolorum minima.
-          Perspiciatis amet, quo id ipsa omnis tempora!
-        </span>
-      </div>
-      <div fxFlex.gt-xs="80">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-    <div fxLayout="row" fxFlex="50">
+  <div fxLayout="column" fxFill>
+
+      <router-outlet fxFill></router-outlet>
+    <div fxLayout="row" fxFlex="50px">
       <app-footer fxLayoutAlign="center center" fxFlex="auto"></app-footer>
     </div>
   </div>
 </div>
+
+
+
+<!-- <div fxflexFill fxLayout="column">
+    <div fxLayout="row">
+      <div fxFlex="1 1 80%" fxFlex.gt-sm="1 1 90%">
+        <app-header></app-header>
+      </div>
+      <div fxFlex="1 1 20%" fxFlex.gt-sm="1 1 10%" fxLayoutAlign>
+        <button fxFill class="btn btn-success" fxLayout fxLayoutAlign="space-around">
+          <mat-icon>shopping_cart</mat-icon>Cart
+        </button>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div class="some" fxLayout="row" fxLayoutGap="5px" fxLayout.lt-sm="column">
+        <div fxFlex.gt-xs="20" class="aside" fxFlexOrder.lt-sm="2">
+          <span>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
+            quae beatae ut ipsum assumenda atque rem, vel est explicabo. Nisi
+            ducimus est excepturi laudantium fuga delectus quasi impedit, id illum
+            quidem, tenetur recusandae similique eligendi cupiditate dicta unde
+            voluptatibus porro odio ab totam. Dolore voluptatibus, dicta provident
+            debitis, vero ratione vitae nesciunt molestiae dolor quia fugiat
+            magnam quaerat nobis? Ea voluptates eveniet non alias libero. Magni
+            consequatur nobis ex adipisci, obcaecati sint veniam corrupti sunt sed
+            mollitia placeat rem ipsam eaque officiis omnis ullam nesciunt
+            eligendi, praesentium similique, aut accusamus nam dolorum minima.
+            Perspiciatis amet, quo id ipsa omnis tempora!
+          </span>
+        </div>
+        <div fxFlex.gt-xs="80">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <div fxLayout="row" fxFlex="50">
+        <app-footer fxLayoutAlign="center center" fxFlex="auto"></app-footer>
+      </div>
+    </div>
+  </div> -->
+  

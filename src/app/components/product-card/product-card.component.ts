@@ -1,4 +1,6 @@
+import { ProductsListService } from "./../../services/products-list.service";
 import { Component, OnInit, Input } from "@angular/core";
+import { Product } from "src/app/services/classes/product";
 
 @Component({
   selector: "app-product-card",
@@ -7,8 +9,14 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class ProductCardComponent implements OnInit {
   @Input("productCardText") productCardText: string;
-  @Input("prodImgInput") imgUrl: string;
-  constructor() {}
+  @Input("productItemInChild") productItem: Product;
+
+  constructor(private productsListService: ProductsListService) {}
 
   ngOnInit() {}
+  clickShow() {
+    this.productsListService.infoCurrProductModal(this.productItem);
+  }
+
+  
 }

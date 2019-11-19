@@ -1,29 +1,32 @@
 <div class="product-container">
-  <mat-card class="example-card" fxLayout="column" fxLayoutAlign="space-between">
-    <div>
+  <div class="product-card" fxLayout="column" fxLayoutAlign="space-between">
+    <div class="product-card-image" fxLayoutAlign="center center">
       <img
-        mat-card-image
-        src="http://localhost:5678/public/{{ imgUrl }}"
+        src="http://localhost:5678/public/{{ productItem.imageUrl }}"
         alt="Photo of a Shiba Inu"
       />
     </div>
     <div>
-      <mat-card-content class="text-center">
-        <h4 class="card-title">SomeTitle</h4>
+      <div class="card-text-center">
+        <h4 class="card-title">{{ productItem.title }}</h4>
         <h3>{{ productCardText }}</h3>
-        <p class="card-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quia
-          nostrum doloremque et ab consequuntur.
-        </p>
-      </mat-card-content>
-      <mat-card-actions fxLayoutAlign="center center">
+        <p class="card-text">Price: {{ productItem.price }}</p>
+      </div>
+      <div fxLayoutAlign="center center" class="card-footer">
         <button fxFlex="80px" class="btn btn-success m-2" mat-button>
           BUY
         </button>
-        <button fxFlex="80px" class="btn  btn-info m-2" mat-button>INFO</button>
-      </mat-card-actions>
+        <button
+          fxFlex="80px"
+          class="btn  btn-info m-2"
+          (click)="clickShow()"
+          mat-button
+        >
+          INFO
+        </button>
+      </div>
     </div>
-  </mat-card>
+  </div>
   <!-- <mat-card class="example-card">
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>

@@ -1,16 +1,33 @@
-<div class="product-container">
-  <div fxLayout="column" fxLayoutAlign="centre centre">
+<div class="product-container" fxLayout.gt-sm="row" fxLayout.lt-md="column">
+  <div fxFlex.gt-sm="280px" class="aside" fxFlexOrder="2" fxFlexOrder.gt-sm="1">
+    <span>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quae
+      beatae ut ipsum assumenda atque rem, vel est explicabo. Nisi ducimus est
+      excepturi laudantium fuga delectus quasi impedit, id illum quidem, tenetur
+      recusandae similique eligendi cupiditate dicta unde voluptatibus porro
+      odio ab totam. Dolore voluptatibus, dicta provident debitis, vero ratione
+      vitae nesciunt molestiae dolor quia fugiat magnam quaerat nobis? Ea
+      voluptates eveniet non alias libero. Magni consequatur nobis ex adipisci,
+      obcaecati sint veniam corrupti sunt sed mollitia placeat rem ipsam eaque
+      officiis omnis ullam nesciunt eligendi, praesentium similique, aut
+      accusamus nam dolorum minima. Perspiciatis amet, quo id ipsa omnis
+      tempora!
+    </span>
+  </div>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="centre centre"
+    fxFlexOrder="1"
+    fxFlexOrder.gt-sm="2"
+  >
     <div>
-      <div class="form-background sticky-top" fxLayout>
+      <div class="form-background" fxLayout>
         <input
           type="text"
           class="form-control mr-2"
           placeholder="Search"
           [(ngModel)]="productsListSearch"
-        /><button
-          class="btn btn-primary"
-          (click)="openProductModal(productModalTemplate)"
-        >
+        /><button class="btn btn-primary">
           Search
         </button>
       </div>
@@ -22,20 +39,27 @@
       fxLayoutAlign.lt-sm="center center"
       class="products-background"
     >
-      <ng-container *ngFor="let prodImg of productImage">
+      <ng-container *ngFor="let productItem of productsList | async">
         <app-product-card
+          *ngIf="
+          productsListSearch
+              ? productItem.title.toLowerCase().includes(productsListSearch.toLowerCase())
+              : true
+          "
           [productCardText]="productsListSearch"
-          [prodImgInput]="prodImg"
-          fxFlex="0 1 25%"
-          fxFlex.lt-lg="0 1 33%"
-          fxFlex.lt-md="0 1 50%"
-          fxFlex.lt-sm="96"
+          [productItemInChild]="productItem"
+          fxFlex.xs="0 1 50%"
+          fxFlex.sm="0 1 33.3%"
+          fxFlex.md="0 1 33.3%"
+          fxFlex.lg="0 1 25%"
+          fxFlex.xl="0 1 20%"
         ></app-product-card>
         <div></div>
       </ng-container>
     </div>
   </div>
 </div>
+
 <ng-template #productModalTemplate>
   <div
     class="modal-header text-center"
@@ -52,6 +76,7 @@
       fxLayoutAlign="space-around"
     >
       <mat-icon>close</mat-icon>
+
     </button> -->
   </div>
 
@@ -59,19 +84,25 @@
     <mat-card class="example-card text-center">
       <img
         mat-card-image
-        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+        src="http://localhost:5678/public/{{ CurrProduct.imageUrl }}"
         alt="Photo of a Shiba Inu"
       />
       <mat-card-content>
-        <h4 class="card-title">SomeTitle</h4>
+        <h4 class="card-title">{{ CurrProduct.title }}</h4>
         <p class="card-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quia
-          nostrum doloremque et ab consequuntur.
+          {{ CurrProduct.description }}
         </p>
+        <p class="price-text">{{ CurrProduct.price }} $</p>
       </mat-card-content>
       <mat-card-actions fxLayoutAlign="end center">
         <button class="btn btn-lg btn-success mr-2" mat-button>Buy</button>
-        <button class="btn btn-lg btn-danger" mat-button>Close</button>
+        <button
+          class="btn btn-lg btn-danger"
+          mat-button
+          (click)="productModalRef.hide()"
+        >
+          Close
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
