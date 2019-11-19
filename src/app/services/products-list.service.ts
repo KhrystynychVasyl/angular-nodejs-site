@@ -86,7 +86,7 @@ export class ProductsListService {
       setTimeout(
         () =>
           someStream.next(
-            new Array(3)
+            new Array(27)
               .fill(this.arrProductsList[this.random])
               .map(el => (el = this.arrProductsList[this.random]))
           ),

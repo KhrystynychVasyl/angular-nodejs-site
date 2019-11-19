@@ -55,7 +55,7 @@
           fxFlex.sm="0 1 33.3%"
           fxFlex.md="0 1 33.3%"
           fxFlex.lg="0 1 25%"
-          fxFlex.xl="0 1 20%"
+          fxFlex.gt-lg="0 1 20%"
         ></app-product-card>
         <div></div>
       </ng-container>
@@ -85,11 +85,13 @@
 
   <div class="modal-body">
     <mat-card class="example-card text-center">
-      <img
-        mat-card-image
-        src="http://localhost:5678/public/{{ CurrProduct.imageUrl }}"
-        alt="Photo of a Shiba Inu"
-      />
+      <div class="product-card-image-modal" fxLayoutAlign="center center">
+        <img
+          src="http://localhost:5678/public/{{ CurrProduct.imageUrl }}"
+          alt="Photo of a Shiba Inu"
+        />
+      </div>
+
       <mat-card-content>
         <h4 class="card-title">{{ CurrProduct.title }}</h4>
         <p class="card-text">

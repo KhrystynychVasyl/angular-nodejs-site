@@ -5,6 +5,16 @@
   background: rgb(247, 247, 247);
 }
 
+.product-card-image-modal {
+  margin: auto;
+  height: 400px;
+  img {
+    border-radius: 5px;
+    max-height: 380px;
+    max-width: 98%;
+  }
+}
+
 .product-container {
   margin: 5px 5px;
 }
@@ -30,6 +40,6 @@
   background-color: rgb(247, 247, 247);
 }
 
-.price-text{
+.price-text {
   font-size: 25px;
 }
