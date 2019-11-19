@@ -5,6 +5,7 @@ exports.findOne = function(req, res, next) {
   db.findOne(dbCollectionName, req.body, function(result) {
     let response = {};
     if (result.length > 0) {
+      response.access = result[0].access;
       response._id = result[0]._id;
       response.check = true;
     }

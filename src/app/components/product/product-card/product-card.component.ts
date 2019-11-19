@@ -1,4 +1,4 @@
-import { ProductsListService } from "./../../services/products-list.service";
+import { ProductsListService } from "../../../services/products-list.service";
 import { Component, OnInit, Input } from "@angular/core";
 import { Product } from "src/app/services/classes/product";
 

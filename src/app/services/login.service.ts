@@ -10,6 +10,9 @@ export class LoginService {
   readonly API_keysList_URL = "/api/keys";
   private logged: boolean = false;
   private currUser: string = "";
+
+  private currUserAdminStatus: boolean = false;
+
   private urlTempU: string;
   private urlTempK: string;
 
@@ -19,8 +22,12 @@ export class LoginService {
     return this.logged;
   }
 
-  get currUserData() {
+  get currUserInfo() {
     return this.currUser;
+  }
+
+  get userAdminStatus() {
+    return this.currUserAdminStatus;
   }
 
   logInUser(name, pass, callback) {
@@ -44,6 +51,7 @@ export class LoginService {
           if (answer["check"]) {
             this.logged = true;
             this.currUser = answer["_id"];
+            this.currUserAdminStatus = answer["check"];
             this.loggedStatus.emit(this.logged);
             callback(true);
           } else {
@@ -84,7 +92,6 @@ export class LoginService {
           if (answer) {
             let data = { login: name, password: pass, access: false };
             this.http.post(this.urlTempU, data).subscribe(answer => {
-              
               this.currUser = answer["_id"];
               this.logged = true;
               this.loggedStatus.emit(this.logged);

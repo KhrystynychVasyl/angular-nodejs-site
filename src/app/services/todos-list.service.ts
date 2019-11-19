@@ -50,13 +50,13 @@ export class TodosListService {
         this.urlTempT = check
           ? this.API_todosList_URL
           : "http://localhost:5678" + this.API_todosList_URL;
-          
+
         let url;
         if (this.isLogged) {
           url =
             this.urlTempT +
             "/?user=" +
-            encodeURIComponent(this.loginService.currUserData);
+            encodeURIComponent(this.loginService.currUserInfo);
         } else {
           url = this.urlTempT;
         }
@@ -80,8 +80,8 @@ export class TodosListService {
 
   deleteHttpTodos(_id: string) {
     let url = this.urlTempT + "/" + _id;
-    if (this.loginService.currUserData) {
-      url = url + "-" + this.loginService.currUserData;
+    if (this.loginService.currUserInfo) {
+      url = url + "-" + this.loginService.currUserInfo;
     } else {
       url = url + "-" + "JohnDoe";
     }
@@ -105,7 +105,7 @@ export class TodosListService {
     let time = moment(new Date()).format("HH:mm:ss A");
     todo.time = moment(new Date());
     todo.title = todo.title + "\n" + time;
-    let body = { data: todo, _idUser: this.loginService.currUserData };
+    let body = { data: todo, _idUser: this.loginService.currUserInfo };
     this.postHttpTodos(body);
   }
 
@@ -120,7 +120,7 @@ export class TodosListService {
 
   updateTodoById(_id: string, todo: Todo) {
     let body = {
-      _idUser: this.loginService.currUserData,
+      _idUser: this.loginService.currUserInfo,
       data: { complete: !todo.complete }
     };
     Object.assign(this.getTodoById(_id), body.data);
