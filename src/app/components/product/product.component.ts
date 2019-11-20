@@ -3,6 +3,12 @@ import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { Observable } from "rxjs";
 import { Product } from "src/app/services/classes/product";
+import { tap, map } from "rxjs/operators";
+
+interface IServerResponse {
+  items: string[];
+  total: number;
+}
 
 @Component({
   selector: "app-product",
@@ -14,23 +20,43 @@ export class ProductComponent implements OnInit {
   productModalRef: BsModalRef;
   @ViewChild("productModalTemplate", { static: false })
   productModalTemplate: TemplateRef<any>;
-  productsList: Observable<Product[]>
-
+  //productsList: Observable<Product[]>
+  productsList: Product[];
+  config: any;
 
   constructor(
     private modalService: BsModalService,
     private productsListService: ProductsListService
   ) {}
 
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
+  public labels: any = {
+    previousLabel: "-",
+    nextLabel: "-",
+    screenReaderPaginationLabel: "Pagination",
+    screenReaderPageLabel: "page",
+    screenReaderCurrentLabel: `You're on page`
+  };
+
   // get productsList(): Observable<Product[]> {
   //   return this.productsListService.ProductsList;
   // }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.productsListService.modalTrigger.subscribe(state => {
       this.openProductModal();
     });
-    this.productsList = this.productsListService.getProductsList()
+    //this.productsList = this.productsListService.getProductsList()
+    this.productsListService.getProductsList().subscribe(list => {
+      this.productsList = list;
+      this.config = {
+        itemsPerPage: 12,
+        currentPage: 1,
+        totalItems: this.productsList.length
+      };
+    });
   }
 
   openProductModal() {

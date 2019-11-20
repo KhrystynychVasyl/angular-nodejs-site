@@ -1,3 +1,34 @@
+.paginate {
+  .custom-pagination-ul {
+    padding-inline-start: 0px !important;
+    display: inline;
+    margin: 0px;
+    .start-end-ul {
+      cursor: pointer;
+    }
+    li {
+      border: 1px solid black;
+      display: inline;
+      padding: 3px 3px;
+    }
+    .current {
+      background-color: #2199e8;
+      color: white;
+    }
+    .disabled-ul {
+      color: #cacaca;
+      cursor: default;
+    }
+    .page-number-ul {
+      padding: 3px 10px;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
+}
+
 .aside {
   border: 1px solid #ced4da;
   margin: 5px 5px 0px;

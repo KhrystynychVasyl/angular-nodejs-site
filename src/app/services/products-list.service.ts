@@ -13,6 +13,7 @@ export class ProductsListService {
   private urlTempP: string = "";
   arrProductsList: Product[] = [
     {
+      _id: "",
       id: 1,
       title: "Large drone",
       imageUrl: "drone-large.jpg",
@@ -20,6 +21,7 @@ export class ProductsListService {
       price: 499.99
     },
     {
+      _id: "",
       id: 2,
       title: "Small drone",
       imageUrl: "drone-small.jpg",
@@ -27,6 +29,7 @@ export class ProductsListService {
       price: 199.99
     },
     {
+      _id: "",
       id: 3,
       title: "Blue drone",
       imageUrl: "drone-blue.jpg",
@@ -34,6 +37,7 @@ export class ProductsListService {
       price: 249.99
     },
     {
+      _id: "",
       id: 4,
       title: "Red drone",
       imageUrl: "drone-red.jpg",
@@ -41,6 +45,7 @@ export class ProductsListService {
       price: 229.99
     },
     {
+      _id: "",
       id: 5,
       title: "Black gyroboard",
       imageUrl: "gyroboard-black.jpg",
@@ -48,6 +53,7 @@ export class ProductsListService {
       price: 729.99
     },
     {
+      _id: "",
       id: 6,
       title: "White gyroboard",
       imageUrl: "gyroboard-white.jpg",
@@ -55,6 +61,7 @@ export class ProductsListService {
       price: 829.99
     },
     {
+      _id: "",
       id: 7,
       title: "Tesla Model X",
       imageUrl: "tesla-x.jpg",
@@ -62,6 +69,7 @@ export class ProductsListService {
       price: 99999.99
     },
     {
+      _id: "",
       id: 8,
       title: "Tesla Roadster",
       imageUrl: "tesla-roadster.jpg",
@@ -69,6 +77,7 @@ export class ProductsListService {
       price: 249999.99
     },
     {
+      _id: "",
       id: 9,
       title: "Odyssey EVO",
       imageUrl: "Odyssey-evo.jpg",
@@ -96,7 +105,7 @@ export class ProductsListService {
               .fill(() => this.arrProductsList[this.random])
               .map(el => (el = this.arrProductsList[this.random]))
           ),
-        3000
+        1000
       );
       // setInterval(
       //   () =>

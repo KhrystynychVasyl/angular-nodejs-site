@@ -1,1 +1,46 @@
-<p>management works!</p>
+<section>
+  <form
+    class="upload-product"
+    fxFlex="400px"
+    fxLayout="column"
+    fxLayoutAlign
+    fxLayoutGap="10px"
+    fxFlexOffset="25px"
+  >
+    <h3>
+      Upload New Product
+    </h3>
+    <div>Product title: <input class="form-control" type="text" name="title" /></div>
+    <div>Product description:
+      <input class="form-control" type="text" name="" />
+    </div>
+    <div> Product price:
+      <input class="form-control" type="number" name="" />
+    </div>
+    <div
+      class="upload-img"
+      fxLayoutGap="5px"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <label>
+        <input
+          fxFlex="160px"
+          class="form-control"
+          type="file"
+          name="imageUrl"
+          (change)="readURL($event)"
+        />
+        <span class="btn btn-primary">
+          Upload
+        </span>
+      </label>
+
+      <img [src]="imageSrc || 'http://placehold.it/160'" alt="your image" />
+    </div>
+    <div fxLayoutAlign="center" fxLayoutGap="10px" fxLayout="row">
+      <button type="reset" (click)="imageSrc = ''">Clear</button>
+      <button>Upload</button>
+    </div>
+  </form>
+</section>

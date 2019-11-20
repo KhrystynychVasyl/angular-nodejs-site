@@ -16,7 +16,11 @@ export class LoginService {
   private urlTempU: string;
   private urlTempK: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    if (!this.logged) {
+      this.currUserAdminStatus = false;
+    }
+  }
 
   get isLogged(): boolean {
     return this.logged;

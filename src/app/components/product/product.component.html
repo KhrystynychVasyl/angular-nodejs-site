@@ -15,11 +15,21 @@
     </span>
   </div>
   <div
+    *ngIf="!productsList"
+    fxFlexOrder="1"
+    fxFlexOrder.gt-sm="2"
+    fxLayoutAlign="center center"
+    fxFlex="82.5"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+  <div
     fxLayout="column"
     fxLayoutAlign="centre centre"
     fxFlexOrder="1"
     fxFlexOrder.gt-sm="2"
     fxFlex="82.5"
+    *ngIf="productsList"
   >
     <div>
       <div class="form-background" fxLayout>
@@ -33,14 +43,61 @@
         </button>
       </div>
     </div>
+    <div class="paginate" fxLayoutAlign="center center">
+      <!-- <pagination-controls
+        class="products-pagination"
+        [previousLabel]="labels.previousLabel"
+        [nextLabel]="labels.nextLabel"
+        (pageChange)="pageChanged($event)"
+      ></pagination-controls> -->
+      <pagination-template
+        #p="paginationApi"
+        [id]="config.id"
+        (pageChange)="config.currentPage = $event"
+      >
+        <ul
+          class="custom-pagination-ul"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+        >
+          <li
+            fxLayoutAlign
+            [class.disabled-ul]="p.isFirstPage()"
+            (click)="p.previous()"
+            class="start-end-ul"
+          >
+            <mat-icon>arrow_left</mat-icon>
+          </li>
+          <li
+            class="page-number-ul"
+            [class.current]="p.getCurrent() === page.value"
+            fxLayoutAlign="center center"
+            *ngFor="let page of p.pages"
+            (click)="p.setCurrent(page.value)"
+          >
+            {{ page.label }}
+          </li>
+          <li
+            fxLayoutAlign
+            [class.disabled-ul]="p.isLastPage()"
+            (click)="p.next()"
+            class="start-end-ul"
+          >
+            <mat-icon>arrow_right</mat-icon>
+          </li>
+        </ul>
+      </pagination-template>
+    </div>
+
     <div
+      *ngIf="productsList"
       fxLayout="row wrap"
       fxLayoutAlign.gt-sm="start center"
       fxFlex.lt-sm="column"
       fxLayoutAlign.lt-sm="center center"
       class="products-background"
     >
-      <ng-container *ngFor="let productItem of productsList | async">
+      <ng-container *ngFor="let productItem of productsList | paginate: config">
         <app-product-card
           *ngIf="
             productsListSearch
@@ -57,7 +114,6 @@
           fxFlex.lg="0 1 25%"
           fxFlex.gt-lg="0 1 20%"
         ></app-product-card>
-        <div></div>
       </ng-container>
     </div>
   </div>
@@ -86,10 +142,7 @@
   <div class="modal-body">
     <mat-card class="example-card text-center">
       <div class="product-card-image-modal" fxLayoutAlign="center center">
-        <img
-          src="{{ CurrProduct.imageUrl }}"
-          alt="Photo of a Shiba Inu"
-        />
+        <img src="{{ CurrProduct.imageUrl }}" alt="Photo of a Shiba Inu" />
       </div>
 
       <mat-card-content>

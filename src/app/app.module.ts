@@ -1,3 +1,4 @@
+import { ProductsListService } from "./services/products-list.service";
 import { TodoComponent } from "./components/todo/todo.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -22,6 +23,8 @@ import { ProductComponent } from "./components/product/product.component";
 import { ProductCardComponent } from "./components/product/product-card/product-card.component";
 import { ManagementComponent } from "./components/management/management.component";
 import { LoginComponent } from "./components/main/header/login/login.component";
+import { LoginGuardService } from "./services/login-guard.service";
+
 
 @NgModule({
   declarations: [
@@ -48,7 +51,12 @@ import { LoginComponent } from "./components/main/header/login/login.component";
     FlexLayoutModule,
     MaterialModule
   ],
-  providers: [LoginService, TodosListService],
+  providers: [
+    LoginService,
+    TodosListService,
+    ProductsListService,
+    LoginGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
