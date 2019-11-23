@@ -159,7 +159,7 @@ exports.createImage = function(req, res, callback) {
       res.send(err);
     }
     let answer = {};
-    answer.imageUrl = `/${res.req.query.collection}/${res.req.file.filename}`;
+    answer.imageUrl = `${req.baseUrl}/${res.req.query.collection}/${res.req.file.filename}`;
     res.send(answer);
   });
 };
