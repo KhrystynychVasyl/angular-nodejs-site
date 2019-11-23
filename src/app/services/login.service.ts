@@ -7,8 +7,9 @@ import { environment } from "src/environments/environment";
 })
 export class LoginService {
   @Output() loggedStatus = new EventEmitter<boolean>();
-  readonly API_usersList_URL = environment.baseUrl + "/api/users";
-  readonly API_keysList_URL = environment.baseUrl + "/api/keys";
+  baseUrl = environment.baseUrl
+  readonly API_usersList_URL = this.baseUrl + "/api/users";
+  readonly API_keysList_URL = this.baseUrl + "/api/keys";
   private logged: boolean = false;
   private currUser: string = "";
 

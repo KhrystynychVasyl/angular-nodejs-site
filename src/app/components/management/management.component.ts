@@ -12,8 +12,9 @@ import { environment } from "src/environments/environment";
 })
 export class ManagementComponent implements OnInit {
   imageSrc;
-  readonly API_images_URL: string = environment.baseUrl + "/api/images";
-  readonly API_products_URL: string = environment.baseUrl + "/api/products";
+  baseUrl = environment.baseUrl;
+  readonly API_images_URL: string = this.baseUrl + "/api/images";
+  readonly API_products_URL: string = this.baseUrl + "/api/products";
   tempImageFile = null;
 
   addProductForm: FormGroup;

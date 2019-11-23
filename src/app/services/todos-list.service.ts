@@ -14,7 +14,9 @@ export class TodosListService {
 
   private isLogged: boolean = false;
 
-  readonly API_todosList_URL = environment.baseUrl +  "/api/todos";
+  baseUrl = environment.baseUrl
+
+  readonly API_todosList_URL = this.baseUrl +  "/api/todos";
 
   private todosLocalList: Todo[] = [];
 

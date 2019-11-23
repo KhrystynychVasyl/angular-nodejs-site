@@ -27,21 +27,21 @@ export class ProductComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private productsListService: ProductsListService
-  ) {}
+  ) {
+    this.productsListService.modalTrigger.subscribe(state => {
+      this.openProductModal();
+    });
+  }
 
   pageChanged(event) {
     this.config.currentPage = event;
   }
-
 
   // get productsList(): Observable<Product[]> {
   //   return this.productsListService.ProductsList;
   // }
 
   async ngOnInit() {
-    this.productsListService.modalTrigger.subscribe(state => {
-      this.openProductModal();
-    });
     //this.productsList = this.productsListService.getProductsList()
     this.productsListService.getProductsList().subscribe(list => {
       this.productsList = list;

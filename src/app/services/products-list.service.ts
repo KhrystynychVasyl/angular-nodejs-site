@@ -10,10 +10,12 @@ import { environment } from "src/environments/environment";
 export class ProductsListService {
   @Output() modalTrigger = new EventEmitter<boolean>();
   currProduct: Product;
-  readonly API_productsList_URL = environment.baseUrl + "/api/products";
+  baseUrl = environment.baseUrl;
+
+  readonly API_productsList_URL = this.baseUrl + "/api/products";
   countLocal = 1;
 
-  baseUrl = environment.baseUrl;
+  
 
   arrProductsList1: Product[] = [
     {
@@ -138,9 +140,7 @@ export class ProductsListService {
 
   getHttpProductsList() {
     this.arrProductsList = this.arrProductsList.map(el => {
-      if (this.baseUrl.length > 0) {
-        el.imageUrl = "http://localhost:5678" + el.imageUrl;
-      }
+        el.imageUrl = this.baseUrl + el.imageUrl;
       return el;
     });
   }
