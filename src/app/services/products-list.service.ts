@@ -9,12 +9,12 @@ import { Product } from "./classes/product";
 export class ProductsListService {
   @Output() modalTrigger = new EventEmitter<boolean>();
   currProduct: Product;
-  readonly API_productsList_URL = "/public/";
+  readonly API_productsList_URL = "/api/";
   private urlTempP: string = "";
-  arrProductsList: Product[] = [
+
+  arrProductsList1: Product[] = [
     {
       _id: "",
-      id: 1,
       title: "Large drone",
       imageUrl: "drone-large.jpg",
       description: "Large drone for most critical missions. Can carry load.",
@@ -22,7 +22,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 2,
       title: "Small drone",
       imageUrl: "drone-small.jpg",
       description: "Small drone. Can fly undetected.",
@@ -30,7 +29,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 3,
       title: "Blue drone",
       imageUrl: "drone-blue.jpg",
       description: "Nice-looking drone in blue color. Has built-in HD camera",
@@ -38,7 +36,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 4,
       title: "Red drone",
       imageUrl: "drone-red.jpg",
       description: "Nice-looking drone in red color",
@@ -46,7 +43,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 5,
       title: "Black gyroboard",
       imageUrl: "gyroboard-black.jpg",
       description: "Black gyroboard to match your style",
@@ -54,7 +50,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 6,
       title: "White gyroboard",
       imageUrl: "gyroboard-white.jpg",
       description: "White gyroboard with blue lights",
@@ -62,7 +57,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 7,
       title: "Tesla Model X",
       imageUrl: "tesla-x.jpg",
       description: "Best crossover in the World",
@@ -70,7 +64,6 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 8,
       title: "Tesla Roadster",
       imageUrl: "tesla-roadster.jpg",
       description: "Best sports car in the World",
@@ -78,12 +71,90 @@ export class ProductsListService {
     },
     {
       _id: "",
-      id: 9,
       title: "Odyssey EVO",
       imageUrl: "Odyssey-evo.jpg",
       description:
         "Современный 9-ти ячеечный эллиптический основной парашют-крыло класса «high performance». Рекомендуется для опытных пилотов.",
       price: 1800.0
+    }
+  ];
+  arrProductsList: Product[] = [
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
+    },
+    {
+      title: "Blue drone",
+      description: "Nice-looking drone in blue color. Has built-in HD camera",
+      price: 249.99,
+      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      _id: "5dd9609f92bb030fa8046cce"
     }
   ];
 
@@ -101,37 +172,12 @@ export class ProductsListService {
       setTimeout(
         () =>
           someStream.next(
-            new Array(27)
+            new Array(71)
               .fill(() => this.arrProductsList[this.random])
               .map(el => (el = this.arrProductsList[this.random]))
           ),
         1000
       );
-      // setInterval(
-      //   () =>
-      //     someStream.next([
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random],
-      //       this.arrProductsList[this.random]
-      //     ]),
-      //   10000
-      // );
     });
   }
 
@@ -151,7 +197,6 @@ export class ProductsListService {
         this.urlTempP = check
           ? this.API_productsList_URL
           : "http://localhost:5678" + this.API_productsList_URL;
-
         this.arrProductsList = this.arrProductsList.map(el => {
           el.imageUrl = this.urlTempP + el.imageUrl;
           return el;

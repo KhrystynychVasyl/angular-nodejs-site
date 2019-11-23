@@ -6,6 +6,8 @@ let users = require("../controlers/users.controller");
 let products = require("../controlers/products.controller");
 let keys = require("../controlers/keys.controller");
 
+let images = require("../controlers/images.controller");
+
 let selectMethodHandler = function(req, res, next) {
   MethodHandler = {
     "/todos": {
@@ -45,6 +47,13 @@ let selectMethodHandler = function(req, res, next) {
       get: keys.findOne,
       put: keys.findOne,
       delete: keys.delete
+    },
+    "/images": {
+      post: images.createImage,
+      get: images.findAllImage
+    },
+    "/images/:id": {
+      get: images.findOneImage
     }
   };
 
@@ -93,5 +102,11 @@ router.get("/products/:id", selectMethodHandler);
 router.put("/products/:id", selectMethodHandler);
 
 router.delete("/products/:id", selectMethodHandler);
+
+router.get("/images", selectMethodHandler);
+
+router.post("/images", selectMethodHandler);
+
+router.get("/images/:id", selectMethodHandler);
 
 module.exports = router;

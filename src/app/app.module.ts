@@ -2,7 +2,7 @@ import { ProductsListService } from "./services/products-list.service";
 import { TodoComponent } from "./components/todo/todo.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
@@ -25,7 +25,6 @@ import { ManagementComponent } from "./components/management/management.componen
 import { LoginComponent } from "./components/main/header/login/login.component";
 import { LoginGuardService } from "./services/login-guard.service";
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +46,7 @@ import { LoginGuardService } from "./services/login-guard.service";
     BrowserAnimationsModule,
     AppBootstrapModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     FlexLayoutModule,
     MaterialModule

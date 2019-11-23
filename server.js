@@ -10,12 +10,14 @@ const PORT = process.env.PORT || 5678;
 server.use(require("./server/routers/corsMiddleWare.js"));
 
 server.use(bodyParser.json());
-
 server.use(express.static(__dirname + "/dist/angular-nodejs-site"));
 
 server.use("/api", require("./server/routers/api.js"));
 
-server.use("/public", express.static(path.resolve(__dirname, "server/public/img/products")));
+server.use(
+  "/public",
+  express.static(path.resolve(__dirname, "server/public/img/products"))
+);
 server.get("/", function(req, res) {
   res.sendFile(path.join(__dirname + "index.html"));
 });

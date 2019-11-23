@@ -32,13 +32,7 @@ export class ProductComponent implements OnInit {
   pageChanged(event) {
     this.config.currentPage = event;
   }
-  public labels: any = {
-    previousLabel: "-",
-    nextLabel: "-",
-    screenReaderPaginationLabel: "Pagination",
-    screenReaderPageLabel: "page",
-    screenReaderCurrentLabel: `You're on page`
-  };
+
 
   // get productsList(): Observable<Product[]> {
   //   return this.productsListService.ProductsList;
@@ -52,7 +46,7 @@ export class ProductComponent implements OnInit {
     this.productsListService.getProductsList().subscribe(list => {
       this.productsList = list;
       this.config = {
-        itemsPerPage: 12,
+        itemsPerPage: 27,
         currentPage: 1,
         totalItems: this.productsList.length
       };

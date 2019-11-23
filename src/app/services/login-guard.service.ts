@@ -16,6 +16,6 @@ export class LoginGuardService implements CanActivate {
   canActivate(): boolean {
     this.loginService.userAdminStatus;
 
-    return true;
+    return this.loginService.userAdminStatus;
   }
 }
