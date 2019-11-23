@@ -15,133 +15,46 @@ export class ProductsListService {
   readonly API_productsList_URL = this.baseUrl + "/api/products";
   countLocal = 1;
 
-  
-
-  arrProductsList1: Product[] = [
-    {
-      _id: "",
-      title: "Large drone",
-      imageUrl: "drone-large.jpg",
-      description: "Large drone for most critical missions. Can carry load.",
-      price: 499.99
-    },
-    {
-      _id: "",
-      title: "Small drone",
-      imageUrl: "drone-small.jpg",
-      description: "Small drone. Can fly undetected.",
-      price: 199.99
-    },
-    {
-      _id: "",
-      title: "Blue drone",
-      imageUrl: "drone-blue.jpg",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99
-    },
-    {
-      _id: "",
-      title: "Red drone",
-      imageUrl: "drone-red.jpg",
-      description: "Nice-looking drone in red color",
-      price: 229.99
-    },
-    {
-      _id: "",
-      title: "Black gyroboard",
-      imageUrl: "gyroboard-black.jpg",
-      description: "Black gyroboard to match your style",
-      price: 729.99
-    },
-    {
-      _id: "",
-      title: "White gyroboard",
-      imageUrl: "gyroboard-white.jpg",
-      description: "White gyroboard with blue lights",
-      price: 829.99
-    },
-    {
-      _id: "",
-      title: "Tesla Model X",
-      imageUrl: "tesla-x.jpg",
-      description: "Best crossover in the World",
-      price: 99999.99
-    },
+  tempProductsList: Product[] = [
     {
       _id: "",
       title: "Tesla Roadster",
-      imageUrl: "tesla-roadster.jpg",
+      imageUrl: "/api/images/cd651d7b0509197e95f3f50fb6510c78.jpg",
       description: "Best sports car in the World",
       price: 249999.99
-    },
-    {
-      _id: "",
-      title: "Odyssey EVO",
-      imageUrl: "Odyssey-evo.jpg",
-      description:
-        "Современный 9-ти ячеечный эллиптический основной парашют-крыло класса «high performance». Рекомендуется для опытных пилотов.",
-      price: 1800.0
-    }
-  ];
-  arrProductsList: Product[] = [
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
     }
   ];
 
   get random() {
-    return Math.floor(Math.random() * 3.99);
+    return Math.floor(Math.random() * (this.tempProductsList.length - 0.01));
   }
 
   constructor(private http: HttpClient) {}
 
   getProductsList(): Observable<Product[]> {
     return new Observable(someStream => {
-      if ((this.countLocal === 1)) {
+      if (this.countLocal === 1) {
         this.getHttpProductsList();
-        ++this.countLocal
+        ++this.countLocal;
       }
       setTimeout(
         () =>
           someStream.next(
-            new Array(71)
-              .fill(() => this.arrProductsList[this.random])
-              .map(el => (el = this.arrProductsList[this.random]))
+            new Array(67)
+              .fill(() => this.tempProductsList[this.random])
+              .map(el => (el = this.tempProductsList[this.random]))
           ),
-        1000
+        5000
       );
     });
   }
 
   getHttpProductsList() {
-    this.arrProductsList = this.arrProductsList.map(el => {
+    this.http.get<Product[]>(this.API_productsList_URL).subscribe(list => {
+      this.tempProductsList = list.map(el => {
         el.imageUrl = this.baseUrl + el.imageUrl;
-      return el;
+        return el;
+      });
     });
   }
 
