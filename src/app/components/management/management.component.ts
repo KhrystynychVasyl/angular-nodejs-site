@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Product } from "src/app/services/classes/product";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-management",
@@ -11,10 +12,8 @@ import { Product } from "src/app/services/classes/product";
 })
 export class ManagementComponent implements OnInit {
   imageSrc;
-  readonly API_images_URL: string = "/api/images";
-  readonly API_products_URL: string = "/api/products";
-  private urlTempM: string = "need to check";
-  private urlTempP: string = "need to check";
+  readonly API_images_URL: string = environment.baseUrl + "/api/images";
+  readonly API_products_URL: string = environment.baseUrl + "/api/products";
   tempImageFile = null;
 
   addProductForm: FormGroup;
@@ -51,50 +50,6 @@ export class ManagementComponent implements OnInit {
     }
   }
 
-  checkImagesUrl() {
-    return new Promise((resolve, reject) => {
-      let check: boolean;
-      this.http
-        .get(this.API_images_URL)
-        .subscribe(
-          list => {
-            check = true;
-          },
-          error => {
-            check = false;
-          }
-        )
-        .add(() => {
-          this.urlTempM = check
-            ? this.API_images_URL
-            : "http://localhost:5678" + this.API_images_URL;
-          return resolve();
-        });
-    });
-  }
-
-  checkProductsUrl() {
-    return new Promise((resolve, reject) => {
-      let check: boolean;
-      this.http
-        .get(this.API_products_URL)
-        .subscribe(
-          list => {
-            check = true;
-          },
-          error => {
-            check = false;
-          }
-        )
-        .add(() => {
-          this.urlTempP = check
-            ? this.API_products_URL
-            : "http://localhost:5678" + this.API_products_URL;
-          return resolve();
-        });
-    });
-  }
-
   uploadNewProduct() {
     const formData = new FormData();
     formData.append("image", this.addProductForm.get("image").value);
@@ -106,24 +61,17 @@ export class ManagementComponent implements OnInit {
 
     this.uploadImage(formData, answer => {
       newProduct["imageUrl"] = answer.imageUrl;
-
       let body: Object = {};
-
       body = { isMany: false, data: newProduct };
-      console.log(body);
-      this.checkProductsUrl().then(() => {
-        this.http.post(this.urlTempP, body).subscribe(answer => {
-          console.log(answer);
-        });
+      this.http.post(this.API_products_URL, body).subscribe(answer => {
+        console.log(answer);
       });
     });
   }
 
   uploadImage(formData, callback) {
-    this.checkImagesUrl().then(() => {
-      this.http
-        .post(this.urlTempM + "?fileType=image&collection=images", formData)
-        .subscribe(answer => callback(answer)).closed;
-    });
+    this.http
+      .post(this.API_images_URL + "?fileType=image&collection=images", formData)
+      .subscribe(answer => callback(answer)).closed;
   }
 }

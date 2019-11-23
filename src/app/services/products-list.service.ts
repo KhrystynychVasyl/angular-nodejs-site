@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { Observable } from "rxjs";
 import { Product } from "./classes/product";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root"
@@ -9,8 +10,10 @@ import { Product } from "./classes/product";
 export class ProductsListService {
   @Output() modalTrigger = new EventEmitter<boolean>();
   currProduct: Product;
-  readonly API_productsList_URL = "/api/";
-  private urlTempP: string = "";
+  readonly API_productsList_URL = environment.baseUrl + "/api/products";
+  countLocal = 1;
+
+  baseUrl = environment.baseUrl;
 
   arrProductsList1: Product[] = [
     {
@@ -83,91 +86,43 @@ export class ProductsListService {
       title: "Blue drone",
       description: "Nice-looking drone in blue color. Has built-in HD camera",
       price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
       _id: "5dd9609f92bb030fa8046cce"
     },
     {
       title: "Blue drone",
       description: "Nice-looking drone in blue color. Has built-in HD camera",
       price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
       _id: "5dd9609f92bb030fa8046cce"
     },
     {
       title: "Blue drone",
       description: "Nice-looking drone in blue color. Has built-in HD camera",
       price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
       _id: "5dd9609f92bb030fa8046cce"
     },
     {
       title: "Blue drone",
       description: "Nice-looking drone in blue color. Has built-in HD camera",
       price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
-      _id: "5dd9609f92bb030fa8046cce"
-    },
-    {
-      title: "Blue drone",
-      description: "Nice-looking drone in blue color. Has built-in HD camera",
-      price: 249.99,
-      imageUrl: "/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
+      imageUrl: "/api/images/7f7e11861029f78ee8cdcccdc7be233f.jpg",
       _id: "5dd9609f92bb030fa8046cce"
     }
   ];
 
   get random() {
-    return Math.floor(Math.random() * 8.99);
+    return Math.floor(Math.random() * 3.99);
   }
 
   constructor(private http: HttpClient) {}
 
   getProductsList(): Observable<Product[]> {
     return new Observable(someStream => {
-      if (this.urlTempP.length === 0) {
+      if ((this.countLocal === 1)) {
         this.getHttpProductsList();
+        ++this.countLocal
       }
       setTimeout(
         () =>
@@ -182,26 +137,12 @@ export class ProductsListService {
   }
 
   getHttpProductsList() {
-    let check: boolean;
-    this.http
-      .get(this.API_productsList_URL)
-      .subscribe(
-        list => {
-          check = true;
-        },
-        error => {
-          check = false;
-        }
-      )
-      .add(() => {
-        this.urlTempP = check
-          ? this.API_productsList_URL
-          : "http://localhost:5678" + this.API_productsList_URL;
-        this.arrProductsList = this.arrProductsList.map(el => {
-          el.imageUrl = this.urlTempP + el.imageUrl;
-          return el;
-        });
-      });
+    this.arrProductsList = this.arrProductsList.map(el => {
+      if (this.baseUrl.length > 0) {
+        el.imageUrl = "http://localhost:5678" + el.imageUrl;
+      }
+      return el;
+    });
   }
 
   infoCurrProductModal(product: Product) {

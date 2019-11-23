@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Injectable, Output, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as moment from "moment";
@@ -13,11 +14,10 @@ export class TodosListService {
 
   private isLogged: boolean = false;
 
-  readonly API_todosList_URL = "/api/todos";
+  readonly API_todosList_URL = environment.baseUrl +  "/api/todos";
 
   private todosLocalList: Todo[] = [];
 
-  private urlTempT: string = "";
 
   pageLoaded: moment.Moment;
 
@@ -35,51 +35,36 @@ export class TodosListService {
   }
 
   getHttpTodosList() {
-    let check: boolean;
-    this.http
-      .get<Todo[]>(this.API_todosList_URL)
-      .subscribe(
-        list => {
-          check = true;
-        },
-        error => {
-          check = false;
-        }
-      )
-      .add(() => {
-        this.urlTempT = check
-          ? this.API_todosList_URL
-          : "http://localhost:5678" + this.API_todosList_URL;
 
         let url;
         if (this.isLogged) {
           url =
-            this.urlTempT +
+            this.API_todosList_URL +
             "/?user=" +
             encodeURIComponent(this.loginService.currUserInfo);
         } else {
-          url = this.urlTempT;
+          url = this.API_todosList_URL;
         }
         this.http.get<Todo[]>(url).subscribe(list => {
           this.todosLocalList = list;
           this.todosListUpdate.emit(true);
         }).closed;
-      });
+    
   }
 
   putHttpTodosById(_idTodos: string, data: Object) {
-    this.http.put<Object>(this.urlTempT + "/" + _idTodos, data).subscribe()
+    this.http.put<Object>(this.API_todosList_URL + "/" + _idTodos, data).subscribe()
       .closed;
   }
 
   postHttpTodos(todo: Object) {
-    this.http.post<Todo>(this.urlTempT, todo).subscribe(todo => {
+    this.http.post<Todo>(this.API_todosList_URL, todo).subscribe(todo => {
       this.todosLocalList.push(todo);
     }).closed;
   }
 
   deleteHttpTodos(_id: string) {
-    let url = this.urlTempT + "/" + _id;
+    let url = this.API_todosList_URL + "/" + _id;
     if (this.loginService.currUserInfo) {
       url = url + "-" + this.loginService.currUserInfo;
     } else {
