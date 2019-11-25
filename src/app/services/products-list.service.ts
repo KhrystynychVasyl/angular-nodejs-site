@@ -8,7 +8,6 @@ import { environment } from "src/environments/environment";
   providedIn: "root"
 })
 export class ProductsListService {
-  @Output() modalTrigger = new EventEmitter<boolean>();
   currProduct: Product;
   baseUrl = environment.baseUrl;
 
@@ -32,35 +31,15 @@ export class ProductsListService {
   constructor(private http: HttpClient) {}
 
   getProductsList(): Observable<Product[]> {
-    return new Observable(someStream => {
-      if (this.countLocal === 1) {
-        this.getHttpProductsList();
-        ++this.countLocal;
-      }
-      setTimeout(
-        () =>
-          someStream.next(
-            new Array(67)
-              .fill(() => this.tempProductsList[this.random])
-              .map(el => (el = this.tempProductsList[this.random]))
-          ),
-        5000
-      );
-    });
+    return this.getHttpProductsList();
   }
 
-  getHttpProductsList() {
-    this.http.get<Product[]>(this.API_productsList_URL).subscribe(list => {
-      this.tempProductsList = list.map(el => {
-        el.imageUrl = this.baseUrl + el.imageUrl;
-        return el;
-      });
-    });
+  getHttpProductsList(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.API_productsList_URL);
   }
 
   infoCurrProductModal(product: Product) {
     this.currProduct = product;
-    this.modalTrigger.emit(true);
   }
 
   getCurrProduct() {

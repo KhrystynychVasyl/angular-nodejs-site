@@ -1,5 +1,5 @@
 import { ProductsListService } from "../../../services/products-list.service";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { Product } from "src/app/services/classes/product";
 
 @Component({
@@ -10,11 +10,15 @@ import { Product } from "src/app/services/classes/product";
 export class ProductCardComponent implements OnInit {
   @Input("productCardText") productCardText: string;
   @Input("productItemInChild") productItem: Product;
+  @Output() showModal = new EventEmitter()
 
   constructor(private productsListService: ProductsListService) {}
 
   ngOnInit() {}
-  clickShow() {
+
+
+  onClickShow() {
+    this.showModal.emit()
     this.productsListService.infoCurrProductModal(this.productItem);
   }
 

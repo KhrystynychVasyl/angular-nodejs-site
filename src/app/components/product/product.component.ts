@@ -1,14 +1,8 @@
 import { ProductsListService } from "./../../services/products-list.service";
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { Observable } from "rxjs";
 import { Product } from "src/app/services/classes/product";
-import { tap, map } from "rxjs/operators";
-
-interface IServerResponse {
-  items: string[];
-  total: number;
-}
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-product",
@@ -16,37 +10,36 @@ interface IServerResponse {
   styleUrls: ["./product.component.scss"]
 })
 export class ProductComponent implements OnInit {
+  baseUrl = environment.baseUrl;
+
   productsListSearch: string;
   productModalRef: BsModalRef;
   @ViewChild("productModalTemplate", { static: false })
   productModalTemplate: TemplateRef<any>;
-  //productsList: Observable<Product[]>
   productsList: Product[];
   config: any;
 
   constructor(
     private modalService: BsModalService,
     private productsListService: ProductsListService
-  ) {
-    this.productsListService.modalTrigger.subscribe(state => {
-      this.openProductModal();
-    });
-  }
+  ) {}
 
   pageChanged(event) {
     this.config.currentPage = event;
   }
 
-  // get productsList(): Observable<Product[]> {
-  //   return this.productsListService.ProductsList;
-  // }
-
   ngOnInit() {
-    //this.productsList = this.productsListService.getProductsList()
     this.productsListService.getProductsList().subscribe(list => {
-      this.productsList = list;
+      if (this.baseUrl) {
+        this.productsList = list.map(el => {
+          el.imageUrl = this.baseUrl + el.imageUrl;
+          return el;
+        });
+      } else {
+        this.productsList = list;
+      }
       this.config = {
-        itemsPerPage: 27,
+        itemsPerPage: 8,
         currentPage: 1,
         totalItems: this.productsList.length
       };
