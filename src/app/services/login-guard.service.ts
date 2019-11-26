@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { CanActivate } from "@angular/router";
-import { LoginService } from "./login.service";
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class LoginGuardService implements CanActivate {
-  private protectStatus: boolean = false;
+  private protectStatus = false;
   constructor(private loginService: LoginService) {
     loginService.loggedStatus.subscribe(status => {
       this.protectStatus = status;

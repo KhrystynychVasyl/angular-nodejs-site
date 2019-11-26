@@ -1,20 +1,20 @@
-import { ProductsListService } from "./../../services/products-list.service";
-import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { Product } from "src/app/services/classes/product";
-import { environment } from "src/environments/environment";
+import { ProductsListService } from './../../services/products-list.service';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Product } from 'src/app/services/classes/product';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: "app-product",
-  templateUrl: "./product.component.html",
-  styleUrls: ["./product.component.scss"]
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
   baseUrl = environment.baseUrl;
 
   productsListSearch: string;
   productModalRef: BsModalRef;
-  @ViewChild("productModalTemplate", { static: false })
+  @ViewChild('productModalTemplate', { static: false })
   productModalTemplate: TemplateRef<any>;
   productsList: Product[];
   config: any;

@@ -1,18 +1,18 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-import { LoginService } from "src/app/services/login.service";
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   modalRef: BsModalRef;
-  logged: boolean = false;
-  errorMessage: string = "";
-  signErrorMessage: string = "";
+  logged = false;
+  errorMessage = '';
+  signErrorMessage = '';
   password: string;
   password_confirm: string;
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.checkLogged()
+    this.checkLogged();
   }
 
   openModal(template: TemplateRef<any>) {
@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(fields) {
-    let _this = this;
+    const _this = this;
     this.loginService.logInUser(fields.name, fields.password, function(result) {
       if (!result) {
-        _this.showErrorMessage("You have to enter valid information");
+        _this.showErrorMessage('You have to enter valid information');
       } else {
         _this.logged = result;
       }
@@ -50,11 +50,11 @@ export class LoginComponent implements OnInit {
 
   showErrorMessage(message: string) {
     this.errorMessage = message;
-    setTimeout(() => (this.errorMessage = ""), 2000);
+    setTimeout(() => (this.errorMessage = ''), 2000);
   }
 
   signIn(fields) {
-    let _this = this;
+    const _this = this;
     this.loginService.signIn(fields.name, fields.password, fields.key, function(
       result
     ) {
@@ -69,6 +69,6 @@ export class LoginComponent implements OnInit {
 
   showSignErrorMessage(message: string) {
     this.signErrorMessage = message;
-    setTimeout(() => (this.signErrorMessage = ""), 2000);
+    setTimeout(() => (this.signErrorMessage = ''), 2000);
   }
 }

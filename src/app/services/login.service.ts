@@ -1,19 +1,21 @@
-import { Injectable, EventEmitter, Output } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+import { Injectable, EventEmitter, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class LoginService {
   @Output() loggedStatus = new EventEmitter<boolean>();
-  baseUrl = environment.baseUrl
-  readonly API_usersList_URL = this.baseUrl + "/api/users";
-  readonly API_keysList_URL = this.baseUrl + "/api/keys";
-  private logged: boolean = false;
-  private currUser: string = "";
+  baseUrl = environment.baseUrl;
+  readonly API_usersList_URL = this.baseUrl + '/api/users';
+  readonly API_keysList_URL = this.baseUrl + '/api/keys';
+  private logged = false;
+  private currUser = '';
 
-  private currUserAdminStatus: boolean = false;
+  some: string = '';
+
+  private currUserAdminStatus = false;
 
   constructor(private http: HttpClient) {
     if (!this.logged) {
@@ -34,12 +36,12 @@ export class LoginService {
   }
 
   logInUser(name, pass, callback) {
-    let body = { login: name, password: pass };
-    this.http.put(this.API_usersList_URL + "/check", body).subscribe(answer => {
-      if (answer["check"]) {
+    const body = { login: name, password: pass };
+    this.http.put(this.API_usersList_URL + '/check', body).subscribe(answer => {
+      if (answer['check']) {
         this.logged = true;
-        this.currUser = answer["_id"];
-        this.currUserAdminStatus = answer["check"];
+        this.currUser = answer['_id'];
+        this.currUserAdminStatus = answer['check'];
         this.loggedStatus.emit(this.logged);
         callback(true);
       } else {
@@ -49,18 +51,18 @@ export class LoginService {
   }
 
   logOut(): boolean {
-    this.currUser = "";
+    this.currUser = '';
     this.loggedStatus.emit(false);
     return (this.logged = false);
   }
 
   signIn(name, pass, key, callback) {
-    let body = { key: key };
-    this.http.put(this.API_keysList_URL + "/check", body).subscribe(answer => {
+    const body = { key };
+    this.http.put(this.API_keysList_URL + '/check', body).subscribe(answer => {
       if (answer) {
-        let data = { login: name, password: pass, access: false };
+        const data = { login: name, password: pass, access: false };
         this.http.post(this.API_usersList_URL, data).subscribe(answer => {
-          this.currUser = answer["_id"];
+          this.currUser = answer['_id'];
           this.logged = true;
           this.loggedStatus.emit(this.logged);
           callback(true);

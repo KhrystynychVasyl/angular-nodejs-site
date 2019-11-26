@@ -1,22 +1,22 @@
 import { environment } from 'src/environments/environment';
-import { Injectable, Output, EventEmitter } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import * as moment from "moment";
+import { Injectable, Output, EventEmitter } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
 
-import { Todo } from "./classes/todo";
-import { LoginService } from "./login.service";
+import { Todo } from './classes/todo';
+import { LoginService } from './login.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class TodosListService {
   @Output() todosListUpdate = new EventEmitter<boolean>();
 
-  private isLogged: boolean = false;
+  private isLogged = false;
 
-  baseUrl = environment.baseUrl
+  baseUrl = environment.baseUrl;
 
-  readonly API_todosList_URL = this.baseUrl +  "/api/todos";
+  readonly API_todosList_URL = this.baseUrl +  '/api/todos';
 
   private todosLocalList: Todo[] = [];
 
@@ -42,7 +42,7 @@ export class TodosListService {
         if (this.isLogged) {
           url =
             this.API_todosList_URL +
-            "/?user=" +
+            '/?user=' +
             encodeURIComponent(this.loginService.currUserInfo);
         } else {
           url = this.API_todosList_URL;
@@ -51,11 +51,11 @@ export class TodosListService {
           this.todosLocalList = list;
           this.todosListUpdate.emit(true);
         }).closed;
-    
+
   }
 
   putHttpTodosById(_idTodos: string, data: Object) {
-    this.http.put<Object>(this.API_todosList_URL + "/" + _idTodos, data).subscribe()
+    this.http.put<Object>(this.API_todosList_URL + '/' + _idTodos, data).subscribe()
       .closed;
   }
 
@@ -66,11 +66,11 @@ export class TodosListService {
   }
 
   deleteHttpTodos(_id: string) {
-    let url = this.API_todosList_URL + "/" + _id;
+    let url = this.API_todosList_URL + '/' + _id;
     if (this.loginService.currUserInfo) {
-      url = url + "-" + this.loginService.currUserInfo;
+      url = url + '-' + this.loginService.currUserInfo;
     } else {
-      url = url + "-" + "JohnDoe";
+      url = url + '-' + 'JohnDoe';
     }
     this.http.delete(url).subscribe().closed;
   }
@@ -89,10 +89,10 @@ export class TodosListService {
     } else {
       todo.id = 1;
     }
-    let time = moment(new Date()).format("HH:mm:ss A");
+    const time = moment(new Date()).format('HH:mm:ss A');
     todo.time = moment(new Date());
-    todo.title = todo.title + "\n" + time;
-    let body = { data: todo, _idUser: this.loginService.currUserInfo };
+    todo.title = todo.title + '\n' + time;
+    const body = { data: todo, _idUser: this.loginService.currUserInfo };
     this.postHttpTodos(body);
   }
 
@@ -106,7 +106,7 @@ export class TodosListService {
   }
 
   updateTodoById(_id: string, todo: Todo) {
-    let body = {
+    const body = {
       _idUser: this.loginService.currUserInfo,
       data: { complete: !todo.complete }
     };

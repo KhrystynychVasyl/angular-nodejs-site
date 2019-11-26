@@ -1,23 +1,23 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { match } from "minimatch";
+import { Pipe, PipeTransform } from '@angular/core';
+import { match } from 'minimatch';
 
 @Pipe({
-  name: "highlight"
+  name: 'highlight'
 })
 export class HighlightPipe implements PipeTransform {
   transform(text: string, search): string {
     function regex(search) {
-      var pattern = search.replace(
+      let pattern = search.replace(
         /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,
-        "\\$&"
+        '\\$&'
       );
       pattern = pattern
-        .split(" ")
+        .split(' ')
         .filter(t => {
           return t.length > 0;
         })
-        .join("|");
-      var regex = new RegExp(pattern, "gi");
+        .join('|');
+      const regex = new RegExp(pattern, 'gi');
       return regex;
     }
 

@@ -1,13 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Observable, interval } from "rxjs";
-import { map, distinctUntilChanged } from "rxjs/operators";
-import * as moment from "moment";
+import { Observable, interval } from 'rxjs';
+import { map, distinctUntilChanged } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
-  selector: "app-clock",
-  templateUrl: "./clock.component.html",
-  styleUrls: ["./clock.component.scss"],
+  selector: 'app-clock',
+  templateUrl: './clock.component.html',
+  styleUrls: ['./clock.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClockComponent implements OnInit {
@@ -24,7 +24,7 @@ export class ClockComponent implements OnInit {
       // why you need 1s interval with HH:mm time format simply update it every minute not every second.
       map(() => {
         this.pageLoaded = moment(new Date()); // you need the value of now not the value of the initialized time.
-        return this.pageLoaded.format("HH:mm A");
+        return this.pageLoaded.format('HH:mm A');
       })
     );
   }

@@ -1,9 +1,9 @@
-import * as moment from "moment";
+import * as moment from 'moment';
 
 export class Todo {
   id: number;
-  title: string = "";
-  complete: boolean = false;
+  title = '';
+  complete = false;
   time: moment.Moment;
   _id: string;
   constructor(fields = {}) {

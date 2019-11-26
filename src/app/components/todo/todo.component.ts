@@ -1,15 +1,15 @@
-import { TodosListService } from "src/app/services/todos-list.service";
-import { Component, OnInit } from "@angular/core";
-import { Todo } from "src/app/services/classes/todo";
+import { TodosListService } from 'src/app/services/todos-list.service';
+import { Component, OnInit } from '@angular/core';
+import { Todo } from 'src/app/services/classes/todo';
 
 @Component({
-  selector: "app-todo",
-  templateUrl: "./todo.component.html",
-  styleUrls: ["./todo.component.scss"]
+  selector: 'app-todo',
+  templateUrl: './todo.component.html',
+  styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
   newTodo = new Todo();
-  searchText: string = "";
+  searchText = '';
 
   constructor(private todosListService: TodosListService) {}
 
@@ -26,7 +26,7 @@ export class TodoComponent implements OnInit {
   }
 
   addTodo() {
-    if (this.newTodo.title !== "") {
+    if (this.newTodo.title !== '') {
       this.todosListService.addTodo(this.newTodo);
       this.newTodo = new Todo();
     }
