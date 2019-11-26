@@ -24,7 +24,7 @@ import { ProductCardComponent } from './components/product/product-card/product-
 import { ManagementComponent } from './components/management/management.component';
 import { LoginComponent } from './components/main/header/login/login.component';
 import { LoginGuardService } from './services/login-guard.service';
-import { BuyCartComponent } from './components/main/buy-cart/buy-cart.component';
+import { BuyCartComponent } from './components/main/buyCart/buyCart.component';
 
 @NgModule({
   declarations: [

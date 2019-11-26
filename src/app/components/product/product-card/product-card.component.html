@@ -1,10 +1,7 @@
-  <div class="product-container">
+<div class="product-container">
   <div class="product-card" fxLayout="column" fxLayoutAlign="space-between">
     <div class="product-card-image" fxLayoutAlign="center center">
-      <img
-        src="{{ productItem.imageUrl }}"
-        alt="Photo of a Shiba Inu"
-      />
+      <img src="{{ productItem.imageUrl }}" alt="Photo of a Shiba Inu" />
     </div>
     <div>
       <div class="card-text-center">
@@ -13,7 +10,12 @@
         <p class="card-text">Price: {{ productItem.price }}</p>
       </div>
       <div fxLayoutAlign="center center" class="footer">
-        <button fxFlex="60px" class="btn btn-success mx-1 my-3" mat-button>
+        <button
+          fxFlex="60px"
+          class="btn btn-success mx-1 my-3"
+          mat-button
+          (click)="onClickAddToCart()"
+        >
           BUY
         </button>
         <button

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BuyCartComponent } from './buy-cart.component';
+import { BuyCartComponent } from './buyCart.component';
 
 describe('BuyCartComponent', () => {
   let component: BuyCartComponent;

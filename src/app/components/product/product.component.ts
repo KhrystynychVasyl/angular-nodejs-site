@@ -5,6 +5,7 @@ import { Product } from 'src/app/services/classes/product';
 import { environment } from 'src/environments/environment';
 
 import { NgxSpinnerService } from 'ngx-spinner';
+import { BuyCartListService } from 'src/app/services/buy-cart-list.service';
 
 @Component({
   selector: 'app-product',
@@ -14,17 +15,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ProductComponent implements OnInit {
   baseUrl = environment.baseUrl;
 
-  productsListSearch: string;
-  productModalRef: BsModalRef;
-  @ViewChild('productModalTemplate', { static: false })
-  productModalTemplate: TemplateRef<any>;
   productsList: Product[];
+  productsListSearch: string;
+  modalRef: BsModalRef;
+  @ViewChild('referToProductModalTemplate', { static: false })
+  productModalTemplate: TemplateRef<any>;
+
   config: any;
 
   constructor(
     private modalService: BsModalService,
     private productsListService: ProductsListService,
-    private SpinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private buyCartListService: BuyCartListService
   ) {}
 
   pageChanged(event) {
@@ -32,12 +35,12 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.SpinnerService.show();
+    this.spinnerService.show();
     this.productsListService.getProductsList().subscribe(list => {
       setTimeout(() => {
         /** spinner ends after 5 seconds */
-        this.SpinnerService.hide();
-      }, 3000);
+        this.spinnerService.hide();
+      }, 1000);
       if (this.baseUrl) {
         this.productsList = list.map(el => {
           el.imageUrl = this.baseUrl + el.imageUrl;
@@ -55,10 +58,14 @@ export class ProductComponent implements OnInit {
   }
 
   openProductModal() {
-    this.productModalRef = this.modalService.show(this.productModalTemplate);
+    this.modalRef = this.modalService.show(this.productModalTemplate);
   }
 
   get CurrProduct() {
     return this.productsListService.getCurrProduct();
+  }
+
+  onClickAddToCart(product: Product) {
+    this.buyCartListService.addProductToCart(product);
   }
 }

@@ -118,7 +118,7 @@
   </div>
 </div>
 
-<ng-template #productModalTemplate>
+<ng-template #referToProductModalTemplate>
   <div class="modal-info-product-card">
     <div
       class="modal-header text-center"
@@ -155,11 +155,17 @@
         <p class="price-text">{{ CurrProduct.price }} $</p>
       </div>
       <div>
-        <button class="btn btn-lg btn-success mr-2" mat-button>Buy</button>
+        <button
+          class="btn btn-lg btn-success mr-2"
+          mat-button
+          (click)="onClickAddToCart(CurrProduct)"
+        >
+          Buy
+        </button>
         <button
           class="btn btn-lg btn-danger"
           mat-button
-          (click)="productModalRef.hide()"
+          (click)="modalRef.hide()"
         >
           Close
         </button>

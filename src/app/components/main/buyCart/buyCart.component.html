@@ -1,0 +1,85 @@
+<div fxFlex="100px" fxFlex.gt-sm="120px" fxFlex.gt-md="160px" fxLayoutAlign>
+  <button
+    fxFill
+    class="btn btn-success"
+    fxLayout
+    fxLayoutAlign="space-around"
+    (click)="openProductModal()"
+  >
+    <mat-icon [matBadge]="totalCount ? totalCount : ''" matBadgeColor="warn"
+      >shopping_cart</mat-icon
+    >
+    Cart
+  </button>
+</div>
+
+<ng-template #referToBuyCartModalTemplate>
+  <div class="modal-info-product-card">
+    <div class="modal-header">
+      <h4 class="modal-title">Cart Info</h4>
+      <button
+        type="button"
+        class="btn ml-auto"
+        (click)="modalRef.hide()"
+        fxLayout
+        fxLayoutAlign="space-around"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="modal-body text-center">
+      <!-- <div class="row">
+        <div class="col-5"><strong>Product</strong></div>
+        <div class="col-3"><strong>Price</strong></div>
+        <div class="col-2"><strong>Quantity</strong></div>
+      </div> -->
+      <ng-container *ngFor="let cartProd of cartProductList">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          class="cart-modal-item"
+        >
+          <div fxFlex="60">
+            {{ cartProd.prod.title }}
+          </div>
+          <div fxFlex="80px">
+            {{ cartProd.prod.price }}
+          </div>
+          <div fxFlex="24px">
+            <button
+              fxFill
+              class="btn btn-danger btn-sm"
+              (click)="deleteProduct(cartProd.prod)"
+            >
+              -
+            </button>
+          </div>
+          <div fxFlex="40px">
+            <input fxFlex="40px" type="text" value="{{ cartProd.count }}" />
+          </div>
+          <div fxFlex="24px">
+            <button
+              fxFill
+              class="btn btn-success btn-sm"
+              (click)="addProduct(cartProd.prod)"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <div class="row">
+        <div class="col-6"><strong>TOTAL</strong></div>
+        <div class="col-6">
+          <strong>{{ totalOrderPrice }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-lg btn-success mr-2">Order</button>
+      <button class="btn btn-lg btn-danger" (click)="modalRef.hide()">
+        Close
+      </button>
+    </div>
+  </div>
+</ng-template>
