@@ -36,16 +36,6 @@
   background: rgb(247, 247, 247);
 }
 
-.product-card-image-modal {
-  margin: auto;
-  height: 400px;
-  img {
-    border-radius: 5px;
-    max-height: 380px;
-    max-width: 98%;
-  }
-}
-
 .product-container {
   margin: 5px 5px;
 }
@@ -71,6 +61,27 @@
   background-color: rgb(247, 247, 247);
 }
 
-.price-text {
-  font-size: 25px;
+.modal-info-product-card {
+  .modal-card-body {
+    margin: 16px;
+    border: 1px solid #ced4da;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  .price-text {
+    font-size: 25px;
+  }
+}
+
+.product-card-image-modal {
+  border-radius: 8px;
+  margin: 8px;
+  border: 1px solid #ced4da;
+  margin: auto;
+  height: 400px;
+  img {
+    border-radius: 5px;
+    max-height: 380px;
+    max-width: 98%;
+  }
 }

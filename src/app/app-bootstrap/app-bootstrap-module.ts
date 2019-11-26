@@ -4,16 +4,13 @@ import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-import { NgxPaginationModule } from 'ngx-pagination';
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
-    NgxPaginationModule
+    ModalModule.forRoot()
   ],
-  exports: [BsDropdownModule, ModalModule, NgxPaginationModule]
+  exports: [BsDropdownModule, ModalModule]
 })
 export class AppBootstrapModule {}

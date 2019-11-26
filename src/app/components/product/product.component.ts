@@ -4,6 +4,8 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Product } from 'src/app/services/classes/product';
 import { environment } from 'src/environments/environment';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -21,7 +23,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private productsListService: ProductsListService
+    private productsListService: ProductsListService,
+    private SpinnerService: NgxSpinnerService
   ) {}
 
   pageChanged(event) {
@@ -29,7 +32,12 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.SpinnerService.show();
     this.productsListService.getProductsList().subscribe(list => {
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        this.SpinnerService.hide();
+      }, 3000);
       if (this.baseUrl) {
         this.productsList = list.map(el => {
           el.imageUrl = this.baseUrl + el.imageUrl;

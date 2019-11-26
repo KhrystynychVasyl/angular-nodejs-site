@@ -55,7 +55,7 @@ export class ManagementComponent implements OnInit {
     const formData = new FormData();
     formData.append('image', this.addProductForm.get('image').value);
 
-    const newProduct = {title:'',description:'',price:0,imageUrl:''};
+    const newProduct = { title: '', description: '', price: 0, imageUrl: '' };
     newProduct.title = this.addProductForm.get('title').value;
     newProduct.description = this.addProductForm.get('description').value;
     newProduct.price = this.addProductForm.get('price').value;

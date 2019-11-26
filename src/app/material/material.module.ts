@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/';
+import { MatBadgeModule } from '@angular/material/badge';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],
@@ -11,7 +14,9 @@ import { MatIconModule } from '@angular/material/';
   exports: [
     MatIconModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatBadgeModule,
+    NgxPaginationModule,
+    NgxSpinnerModule
   ]
 })
 export class MaterialModule {}

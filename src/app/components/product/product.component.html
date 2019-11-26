@@ -1,4 +1,11 @@
 <div class="product-container" fxLayout.gt-sm="row" fxLayout.lt-md="column">
+  <ngx-spinner
+    [fullScreen]="false"
+    type="ball-clip-rotate-multiple"
+    size="medium"
+  >
+    <p class="loading">Loading Awesomeness...</p>
+  </ngx-spinner>
   <div fxFlex.gt-sm="280px" class="aside" fxFlexOrder="2" fxFlexOrder.gt-sm="1">
     <span>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quae
@@ -13,15 +20,6 @@
       accusamus nam dolorum minima. Perspiciatis amet, quo id ipsa omnis
       tempora!
     </span>
-  </div>
-  <div
-    *ngIf="!productsList"
-    fxFlexOrder="1"
-    fxFlexOrder.gt-sm="2"
-    fxLayoutAlign="center center"
-    fxFlex="82.5"
-  >
-    <mat-spinner></mat-spinner>
   </div>
   <div
     fxLayout="column"
@@ -121,39 +119,42 @@
 </div>
 
 <ng-template #productModalTemplate>
-  <div
-    class="modal-header text-center"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-  >
-    <h4 class="modal-title">Product Info</h4>
-    <!-- <button
-      type="button"
-      class="btn-light ml-auto"
-      aria-label="Close"
-      (click)="productModalRef.hide()"
-      fxLayout
-      fxLayoutAlign="space-around"
+  <div class="modal-info-product-card">
+    <div
+      class="modal-header text-center"
+      fxLayout="row"
+      fxLayoutAlign="center center"
     >
-      <mat-icon>close</mat-icon>
+      <h4 class="modal-title">Product Info</h4>
+      <!-- <button
+        type="button"
+        class="btn-light ml-auto"
+        aria-label="Close"
+        (click)="productModalRef.hide()"
+        fxLayout
+        fxLayoutAlign="space-around"
+      >
+        <mat-icon>close</mat-icon>
+  
+      </button> -->
+    </div>
 
-    </button> -->
-  </div>
-
-  <div class="modal-body">
-    <mat-card class="example-card text-center">
+    <div
+      class="modal-card-body text-center"
+      fxLayoutAlign="center center"
+      fxLayout="column"
+    >
       <div class="product-card-image-modal" fxLayoutAlign="center center">
         <img src="{{ CurrProduct.imageUrl }}" alt="Photo of a Shiba Inu" />
       </div>
-
-      <mat-card-content>
+      <div>
         <h4 class="card-title">{{ CurrProduct.title }}</h4>
         <p class="card-text">
           {{ CurrProduct.description }}
         </p>
         <p class="price-text">{{ CurrProduct.price }} $</p>
-      </mat-card-content>
-      <mat-card-actions fxLayoutAlign="end center">
+      </div>
+      <div>
         <button class="btn btn-lg btn-success mr-2" mat-button>Buy</button>
         <button
           class="btn btn-lg btn-danger"
@@ -162,7 +163,7 @@
         >
           Close
         </button>
-      </mat-card-actions>
-    </mat-card>
+      </div>
+    </div>
   </div>
 </ng-template>
