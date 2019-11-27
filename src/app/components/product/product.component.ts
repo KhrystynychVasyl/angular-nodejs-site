@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
   modalRef: BsModalRef;
   @ViewChild('referToProductModalTemplate', { static: false })
   productModalTemplate: TemplateRef<any>;
-
+  hide = true;
   config: any;
 
   constructor(
@@ -49,11 +49,13 @@ export class ProductComponent implements OnInit {
       } else {
         this.productsList = list;
       }
+      
       this.config = {
-        itemsPerPage: 8,
+        itemsPerPage: 16,
         currentPage: 1,
         totalItems: this.productsList.length
       };
+      this.hide = this.config.totalItems > this.config.itemsPerPage;
     });
   }
 

@@ -36,12 +36,12 @@
           class="form-control mr-2"
           placeholder="Search"
           [(ngModel)]="productsListSearch"
-        /><button class="btn btn-primary" >
+        /><button class="btn btn-primary">
           Search
         </button>
       </div>
     </div>
-    <div class="paginate" fxLayoutAlign="center center">
+    <div class="paginate" fxLayoutAlign="center center" *ngIf='hide'>
       <!-- <pagination-controls
         class="products-pagination"
         [previousLabel]="labels.previousLabel"
