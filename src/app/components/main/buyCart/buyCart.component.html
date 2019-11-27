@@ -5,6 +5,7 @@
     fxLayout
     fxLayoutAlign="space-around"
     (click)="openProductModal()"
+    [disabled]="!totalCount"
   >
     <mat-icon [matBadge]="totalCount ? totalCount : ''" matBadgeColor="warn"
       >shopping_cart</mat-icon
@@ -21,65 +22,132 @@
         type="button"
         class="btn ml-auto"
         (click)="modalRef.hide()"
-        fxLayout
         fxLayoutAlign="space-around"
       >
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <div class="modal-body text-center">
-      <!-- <div class="row">
-        <div class="col-5"><strong>Product</strong></div>
-        <div class="col-3"><strong>Price</strong></div>
-        <div class="col-2"><strong>Quantity</strong></div>
-      </div> -->
+    <div class="modal-body">
       <ng-container *ngFor="let cartProd of cartProductList">
         <div
           fxLayout="row"
-          fxLayoutAlign="space-between center"
+          fxLayout.lt-md="column"
+          fxLayoutGap="5px"
           class="cart-modal-item"
+          fxLayoutAlign="space-between"
         >
-          <div fxFlex="60">
-            {{ cartProd.prod.title }}
+          <div fxFlex="180px" fxLayoutAlign="center center">
+            <div class="cart-modal-image">
+              <img
+                src="{{ cartProd.prod.imageUrl }}"
+                alt="{{ cartProd.prod.title }}"
+              />
+            </div>
           </div>
-          <div fxFlex="80px">
-            {{ cartProd.prod.price }}
-          </div>
-          <div fxFlex="24px">
-            <button
-              fxFill
-              class="btn btn-danger btn-sm"
-              (click)="deleteProduct(cartProd.prod)"
+          <div fxFlex="90" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign.gt-sm="space-between center">
+              <div fxFlex="75">
+                <span>
+                  {{ cartProd.prod.title }}
+                </span>
+              </div>
+              <div fxShow fxHide.lt-md fxFlex="10" fxLayout="center center">
+                <span>Sum</span>
+              </div>
+            </div>
+            <div
+              fxLayout="row"
+              fxLayout.lt-md="column"
+              fxLayoutAlign.gt-sm="space-between"
+              class="cart-item-info"
             >
-              -
-            </button>
-          </div>
-          <div fxFlex="40px">
-            <input fxFlex="40px" type="text" value="{{ cartProd.count }}" />
-          </div>
-          <div fxFlex="24px">
-            <button
-              fxFill
-              class="btn btn-success btn-sm"
-              (click)="addProduct(cartProd.prod)"
-            >
-              +
-            </button>
+              <div
+                fxLayoutAlign.lt-md="start center"
+                fxLayoutAlign="center center"
+              >
+                <span>{{ cartProd.prod.price }}</span>
+              </div>
+              <div fxLayout.gt-sm="row" fxLayout.lt-md="column">
+                <div
+                  fxLayout="row"
+                  fxFlex.gt-sm="135px"
+                  class="cart-item-quantity-field"
+                >
+                  <div fxFlex.gt-sm="40px" fxFlex.lt-md="25">
+                    <button
+                      fxFill
+                      class="btn btn-outline-danger btn-lg"
+                      (click)="deleteProduct(cartProd.prod)"
+                      fxLayoutAlign="space-around"
+                    >
+                      <mat-icon>remove</mat-icon>
+                    </button>
+                  </div>
+                  <div fxFlex="90" fxFlex.gt-sm="64px">
+                    <input
+                      class="form-control"
+                      type="text"
+                      value="{{ cartProd.count }}"
+                    />
+                  </div>
+                  <div fxFlex.gt-sm="40px" fxFlex.lt-md="25">
+                    <button
+                      fxFill
+                      class="btn btn-outline-success btn-lg"
+                      (click)="addProduct(cartProd.prod)"
+                      fxLayoutAlign="space-around"
+                    >
+                      <mat-icon>add_shopping_cart</mat-icon>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  fxFlex.gt-sm="160px"
+                  fxLayoutAlign.lt-md="space-between center"
+                  fxLayoutAlign="end center"
+                >
+                  <span fxHide fxShow.lt-md>Sum</span>
+                  <span>{{
+                    (cartProd.prod.price * cartProd.count).toFixed(2)
+                  }}</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <span>
+                Seller
+              </span>
+            </div>
+            <div>
+              <span
+                >Additional services</span
+              >
+            </div>
           </div>
         </div>
       </ng-container>
-      <div class="row">
-        <div class="col-6"><strong>TOTAL</strong></div>
-        <div class="col-6">
-          <strong>{{ totalOrderPrice }}</strong>
+    </div>
+
+    <div class="modal-footer" fxLayoutAlign.gt-xs="space-between center">
+      <button
+        fxShow
+        fxHide.xs
+        class="btn btn-lg btn-info"
+        (click)="modalRef.hide()"
+      >
+        Back To Shop
+      </button>
+      <div fxFlex="98" fxFlex.gt-xs="240px" class="cart-modal-check">
+        <div fxLayoutAlign="space-between center">
+          <span>Total Price: </span>
+          <span>
+            {{ totalOrderPrice }}
+          </span>
+        </div>
+        <div>
+          <button fxFill class="btn btn-lg btn-success mr-2">Order</button>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-lg btn-success mr-2">Order</button>
-      <button class="btn btn-lg btn-danger" (click)="modalRef.hide()">
-        Close
-      </button>
     </div>
   </div>
 </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  status = true;
+  status: boolean = true;
+  public showClock: boolean = false;
   constructor() {}
 
   ngOnInit() {}
+
+  @HostListener('window:resize', ['$event'])
+  checkShowClock(event) {
+    this.showClock = window.innerWidth > 360;
+  }
 }

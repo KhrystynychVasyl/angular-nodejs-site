@@ -11,3 +11,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+@media (min-width: 600px) {
+  .modal-lg {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 960px) {
+  .modal-lg{
+    max-width: 860px;
+  }
+}

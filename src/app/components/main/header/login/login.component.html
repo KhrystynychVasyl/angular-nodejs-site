@@ -11,7 +11,7 @@
       fxLayout.lt-xs="column"
       fxLayout.sm="row"
       fxLayout="column"
-      class="p-2"
+      class="p-2 my-auto"
       fxLayoutGap="6px"
     >
       <input
@@ -33,16 +33,21 @@
       fxLayout="row"
       fxLayout.gt-sm="column"
       fxLayoutAlign.lt-lg="space-around"
-      fxLayoutGap="6px"
+      fxLayoutGap="4px"
       class="p-2"
     >
       <button
+        fxFlex.lt-md="68px"
         class="btn btn-outline-success p-2"
         (click)="logIn(loginForm.value)"
       >
         Log In
       </button>
-      <button class="btn btn-outline-info p-2" (click)="openModal(template)">
+      <button
+        fxFlex.lt-md="68px"
+        class="btn btn-outline-info p-2"
+        (click)="openModal(template)"
+      >
         Sing In
       </button>
     </div>

@@ -10,6 +10,7 @@ import { BuyCartListService } from 'src/app/services/buy-cart-list.service';
 })
 export class BuyCartComponent implements OnInit {
   modalRef: BsModalRef;
+  valueWidth = false;
   @ViewChild('referToBuyCartModalTemplate', { static: false })
   buyCartModalTemplate: TemplateRef<any>;
 
@@ -21,7 +22,10 @@ export class BuyCartComponent implements OnInit {
   ngOnInit() {}
 
   openProductModal() {
-    this.modalRef = this.modalService.show(this.buyCartModalTemplate);
+    this.modalRef = this.modalService.show(
+      this.buyCartModalTemplate,
+      Object.assign({}, { class: 'modal-lg' })
+    );
   }
 
   get cartProductList() {

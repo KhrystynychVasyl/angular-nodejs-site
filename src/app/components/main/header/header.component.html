@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
   <a routerLink="/home" class="navbar-brand">MyLoGo</a>
-  <app-clock fxShow.gt-sm="false" class="mr-auto font-weight-bold"></app-clock>
+  <app-clock
+    *ngIf="showClock"
+    fxShow.gt-sm="false"
+    class="mr-auto font-weight-bold"
+  ></app-clock>
 
   <button
     class="navbar-toggler ml-auto mr-2"
