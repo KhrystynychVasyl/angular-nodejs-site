@@ -1,3 +1,5 @@
+import { ChatSocketService } from './services/chat-socket.service';
+import { BuyCartListService } from 'src/app/services/buy-cart-list.service';
 import { ProductsListService } from './services/products-list.service';
 import { TodoComponent } from './components/todo/todo.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +27,8 @@ import { ManagementComponent } from './components/management/management.componen
 import { LoginComponent } from './components/main/header/login/login.component';
 import { LoginGuardService } from './services/login-guard.service';
 import { BuyCartComponent } from './components/main/buyCart/buyCart.component';
+import { ChatModuleComponent } from './components/chat-module/chat-module.component';
+import { ChatWindowComponent } from './components/chat-module/chat-window/chat-window.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,9 @@ import { BuyCartComponent } from './components/main/buyCart/buyCart.component';
     ProductComponent,
     ProductCardComponent,
     ManagementComponent,
-    BuyCartComponent
+    BuyCartComponent,
+    ChatModuleComponent,
+    ChatWindowComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +61,11 @@ import { BuyCartComponent } from './components/main/buyCart/buyCart.component';
   ],
   providers: [
     LoginService,
+    LoginGuardService,
     TodosListService,
     ProductsListService,
-    LoginGuardService
+    BuyCartListService,
+    ChatSocketService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,10 +1,11 @@
-import { ManagementComponent } from './components/management/management.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { ProductComponent } from './components/product/product.component';
+import { ChatModuleComponent } from './components/chat-module/chat-module.component';
+import { ManagementComponent } from './components/management/management.component';
 import { LoginGuardService } from './services/login-guard.service';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'todo', component: TodoComponent },
   { path: 'products', component: ProductComponent },
+  { path: 'chat-module', component: ChatModuleComponent },
   {
     path: 'management',
     component: ManagementComponent,

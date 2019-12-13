@@ -1,0 +1,19 @@
+<!-- <div *ngIf="!logged">
+  <p>You need to <strong>Log In</strong> before enter the chat</p>
+</div>
+<div *ngIf="logged">
+  <div id="chat-container"></div>
+  <form #chatForm="ngForm">
+    <input type="text" name="message" ngModel />
+    <button (click)="sendMessage(chatForm.value.message)">Send</button>
+  </form>
+</div> -->
+
+<div id="chat-container" *ngIf="messages.length > 0">
+  <div *ngFor="let msg of messages">{{ msg }}</div>
+</div>
+<div>
+  <input type="text" [(ngModel)]="message" />
+  <button (click)="chatMessage()">Send</button>
+  <button (click)="disconnect()">dis</button>
+</div>

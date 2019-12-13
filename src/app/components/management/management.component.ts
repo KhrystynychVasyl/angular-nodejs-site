@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Product } from 'src/app/services/classes/product';
 import { environment } from 'src/environments/environment';
 
 @Component({
