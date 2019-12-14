@@ -4,20 +4,22 @@ const http = require('http').Server(app);
 const path = require('path');
 const bodyParser = require('body-parser');
 
-/*
-const io = require('socket.io')()
-io.attach(http, {
-    pingInterval: 10000,
-    pingTimeout: 5000,
-    cookie: false
-});
-require("./server/socket/socket-events.js")(io);
-*/
+// const io = require('socket.io')()
+// io.attach(http, {
+//     pingInterval: 10000,
+//     pingTimeout: 5000,
+//     cookie: false
+// });
+// require("./server/socket/socket-events.js")(io);
+
+// const io = require('socket.io')(http);
+// io.on('connection', socket => {
+//   console.log(socket.id);
+//   require('./server/socket/socket-events.js')(socket);
+// });
+
 const io = require('socket.io')(http);
-io.on('connection', socket => {
-  console.log(socket.id);
-  require('./server/socket/socket-events.js')(socket);
-});
+require('./server/socket/socket-events.js')(io);
 
 const PORT = process.env.PORT || 5678;
 

@@ -8,12 +8,26 @@
     <button (click)="sendMessage(chatForm.value.message)">Send</button>
   </form>
 </div> -->
-
-<div id="chat-container" *ngIf="messages.length > 0">
-  <div *ngFor="let msg of messages">{{ msg }}</div>
-</div>
-<div>
-  <input type="text" [(ngModel)]="message" />
-  <button (click)="chatMessage()">Send</button>
-  <button (click)="disconnect()">dis</button>
+<div class="chat-box-container">
+  <div class="chat-box" fxFlex="100">
+    <div>
+      <div id="chat-container" fxLayout="column">
+        <div
+          *ngFor="let message of messages"
+          [ngClass]="{
+            'your-chat-message':
+              message.yourMessage && !message.servicesMessage,
+            'chat-message': !message.yourMessage && !message.servicesMessage,
+            'service-message': message.servicesMessage
+          }"
+        >
+          {{ message.message }}
+        </div>
+      </div>
+      <div>
+        <input type="text" [(ngModel)]="message" />
+        <button (click)="chatMessage()">Send</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,23 @@
+.chat-box-container {
+  margin: auto;
+  max-width: 480px;
+
+  div {
+    margin: 5px;
+    border: 1px solid black;
+  }
+  .your-chat-message {
+    align-self: flex-end;
+    width: 80%;
+    background-color: rgb(177, 252, 103);
+    text-align: right;
+  }
+  .chat-message {
+    width: 80%;
+    background-color: rgb(255, 185, 185);
+  }
+  .service-message {
+    background-color: rgb(137, 227, 255);
+    text-align: center;
+  }
+}

@@ -1,7 +1,5 @@
 import { ChatSocketService } from '../../../services/chat-socket.service';
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
-import { merge } from 'rxjs';
 
 @Component({
   selector: 'app-chat-window',
@@ -9,35 +7,57 @@ import { merge } from 'rxjs';
   styleUrls: ['./chat-window.component.scss']
 })
 export class ChatWindowComponent implements OnInit, OnDestroy {
+  private subscription;
   message: string;
-  messages: any[] = [];
-  constructor(
-    private chatSocketService: ChatSocketService,
-    private loginService: LoginService
-  ) {}
+  messages: any[] = [
+    {
+      yourMessage: true,
+      servicesMessage: true,
+      message: 'You connected'
+    },
+    {
+      yourMessage: false,
+      servicesMessage: false,
+      message:
+        'addd: goasdasd sad adad ad ad ad ad ad adasd sad asd sad sad asd asd as dads ad ad asd ad ad sad a'
+    },
+    {
+      yourMessage: false,
+      servicesMessage: true,
+      message: 'K2 connected'
+    },
+    {
+      yourMessage: false,
+      servicesMessage: true,
+      message: 'Stat disconnected'
+    },
+    {
+      yourMessage: true,
+      servicesMessage: false,
+      message:
+        'My: dask djasjhd ajfh afh aksdghfj adslkf hdslf hdsgf hsadkg jdsagk hdsgj hdsagjh salkdgh sadlkg jasdgh asjgdh sajdgh sajgdh dsajhg sajgh dsag'
+    }
+  ];
+  constructor(private chatSocketService: ChatSocketService) {}
 
   ngOnInit() {
-    this.chatSocketService.userConnected(this.loginService.currUserInfo);
-    this.messages.push('You joined');
-    this.chatSocketService.getMessage().subscribe(msg => {
-      this.messages.push(`${msg['name']}: ${msg['message']}`);
-    });
-    this.chatSocketService.getMessage2().subscribe(msg => {
-      this.messages.push(`${msg} connected`);
-    });
-    this.chatSocketService.getMessage3().subscribe(msg => {
-      this.messages.push(`${msg} disconnected`);
-    });
-    this.chatSocketService.allMessage().subscribe(mes => console.log(mes));
-  }
-
-  get logged() {
-    return this.loginService.isLogged;
+    this.chatSocketService.userConnected();
+    // this.chatSocketService.getMessage().subscribe(msg => {
+    //   this.messages.push(`${msg['name']}: ${msg['message']}`);
+    // });
+    // this.chatSocketService.getMessage2().subscribe(msg => {
+    //   this.messages.push(`${msg} connected`);
+    // });
+    // this.chatSocketService.getMessage3().subscribe(msg => {
+    //   this.messages.push(`${msg} disconnected`);
+    // });
+    this.subscription = this.chatSocketService
+      .allChatMessage()
+      .subscribe(message => this.messages.push(message));
   }
 
   chatMessage() {
     this.sendMessage(this.message);
-    this.messages.push(`You: ${this.message}`);
     this.message = '';
   }
 
@@ -45,16 +65,9 @@ export class ChatWindowComponent implements OnInit, OnDestroy {
     this.chatSocketService.sendMessage(msg);
   }
 
-  disconnect() {
-    this.loginService.loggedStatus.subscribe(status => {
-      if (!status) {
-        this.chatSocketService.close();
-      }
-    });
-  }
-
   @HostListener('window:beforeunload')
   ngOnDestroy() {
     this.chatSocketService.close();
+    this.subscription.unsubscribe();
   }
 }

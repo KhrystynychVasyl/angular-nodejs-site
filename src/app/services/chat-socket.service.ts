@@ -1,40 +1,78 @@
 import { merge } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatSocketService {
-  constructor(private socket: Socket) {}
+  messageData = {};
+  currNickName: string = '';
+  constructor(private socket: Socket, private loginService: LoginService) {}
 
-  open() {
-    this.socket.connect();
+  setCurrNickName(name) {
+    this.currNickName = name;
   }
 
   close() {
     this.socket.disconnect();
   }
 
-  userConnected(name) {
-    this.open();
-    this.socket.emit('new-user', name);
+  getCurrNickNameStatus() {
+    return Boolean(this.currNickName);
   }
 
-  getMessage() {
-    return this.socket.fromEvent('chat-message');
+  userConnected() {
+    this.messageData['userId'] = this.loginService.currUserInfo;
+    this.messageData['nickName'] = this.currNickName;
+    this.socket.connect();
+    this.socket.emit('new-user', this.messageData);
   }
-  getMessage2() {
-    return this.socket.fromEvent('user-connected');
-  }
-  getMessage3() {
-    return this.socket.fromEvent('user-disconnected');
-  }
-  allMessage() {
-    return merge(this.getMessage(), this.getMessage2(), this.getMessage3());
+
+  allChatMessage() {
+    return this.socket.fromEvent('chatMessage').pipe(
+      map(data => {
+        let localeData = {
+          yourMessage: false,
+          servicesMessage: false,
+          message: ''
+        };
+        switch (data['messageType']) {
+          case 'user-connected':
+            localeData.servicesMessage = true;
+            if (data['userId'] === this.loginService.currUserInfo) {
+              localeData.yourMessage = true;
+              localeData.message = `You have joined`;
+            } else {
+              localeData.message = `${data['nickName']} connected`;
+            }
+            return localeData;
+          case 'chat-message':
+            if (data['userId'] === this.loginService.currUserInfo) {
+              localeData.yourMessage = true;
+              localeData.message = `You: ${data['message']}`;
+            } else {
+              localeData.message = `${data['nickName']}: ${data['message']}`;
+            }
+            return localeData;
+          case 'user-disconnected':
+            localeData.servicesMessage = true;
+            if (data['userId'] === this.loginService.currUserInfo) {
+              localeData.yourMessage = true;
+              localeData.message = `You disconnected`;
+            } else {
+              localeData.message = `${data['nickName']} disconnected`;
+            }
+            return localeData;
+        }
+      })
+    );
   }
 
   sendMessage(msg) {
-    this.socket.emit('send-chat-message', msg);
+    this.messageData['message'] = msg;
+    this.socket.emit('send-chat-message', this.messageData);
   }
 }

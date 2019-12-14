@@ -1,4 +1,10 @@
+<!-- <app-chat-window></app-chat-window> -->
 <div *ngIf="!logged">
   <p>You need to <strong>Log In</strong> before enter the chat</p>
 </div>
-<app-chat-window *ngIf="logged"></app-chat-window>
+<div *ngIf="logged && !nickNameStatus">
+  <p>You Nick Name</p>
+  <input type="text" [(ngModel)]="nickName" />
+  <button (click)="setNickName()">Send</button>
+</div>
+<app-chat-window *ngIf="logged && nickNameStatus"></app-chat-window>
