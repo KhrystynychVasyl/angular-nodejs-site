@@ -1,33 +1,22 @@
-<!-- <div *ngIf="!logged">
-  <p>You need to <strong>Log In</strong> before enter the chat</p>
-</div>
-<div *ngIf="logged">
-  <div id="chat-container"></div>
-  <form #chatForm="ngForm">
-    <input type="text" name="message" ngModel />
-    <button (click)="sendMessage(chatForm.value.message)">Send</button>
-  </form>
-</div> -->
 <div class="chat-box-container">
-  <div class="chat-box" fxFlex="100">
-    <div>
-      <div id="chat-container" fxLayout="column">
-        <div
-          *ngFor="let message of messages"
-          [ngClass]="{
-            'your-chat-message':
-              message.yourMessage && !message.servicesMessage,
-            'chat-message': !message.yourMessage && !message.servicesMessage,
-            'service-message': message.servicesMessage
-          }"
-        >
-          {{ message.message }}
-        </div>
+  <div class="chat-box">
+    <div class="chat-container" #scrollframe>
+      <div
+        *ngFor="let message of messages"
+        class="chat-message"
+        [ngClass]="{
+          'your-message': message.yourMessage && !message.servicesMessage,
+          'users-message': !message.yourMessage && !message.servicesMessage,
+          'service-message': message.servicesMessage
+        }"
+        #item
+      >
+        {{ message.message }}
       </div>
-      <div>
-        <input type="text" [(ngModel)]="message" />
-        <button (click)="chatMessage()">Send</button>
-      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" [(ngModel)]="message" (keyup.enter)="chatMessage()" />
+      <button (click)="chatMessage()">Send</button>
     </div>
   </div>
 </div>
